@@ -5,6 +5,9 @@ import java.awt.event.*;
 import java.awt.print.*;
 import java.util.*;
 import javax.swing.*;
+import java.net.URL;
+
+import com.darwinsys.swingui.I18N;
 
 /** This will become the View part of an MVC.
  * It will display a list of GObjs and paint them.
@@ -35,7 +38,7 @@ public class JBView extends JFrame {
 		cp.setLayout(new BorderLayout());
 		toolBar = new JToolBar();
 
-		ImageIcon ii = new ImageIcon("images" + '/' + "cut" + ".gif");
+		ImageIcon ii = getMyImageIcon("cut");
 		cutAction = new AbstractAction("", ii) {
 			public void actionPerformed(ActionEvent e) {
 				model.cut();
@@ -55,7 +58,7 @@ public class JBView extends JFrame {
 		};
 
 		// Construct the JToolBar 
-		addToToolBar(toolBar, "Circle").addActionListener(new AbstractAction() {
+		addToToolBar(toolBar, "Create Circle", getMyImageIcon("Circle")).addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				GOval g = new GOval();
 				g.setLocation(100, 100);
@@ -63,7 +66,7 @@ public class JBView extends JFrame {
 				model.add(g);
 			}
 		});
-		addToToolBar(toolBar, "Rectangle").addActionListener(new AbstractAction() {
+		addToToolBar(toolBar, "Create Rectangle", getMyImageIcon("Rectangle")).addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				GRect g = new GRect();
 				g.setLocation(100, 100);
@@ -71,8 +74,8 @@ public class JBView extends JFrame {
 				model.add(g);
 			}
 		});
-		addToToolBar(toolBar, "Line");
-		addToToolBar(toolBar, "Text").addActionListener(new ActionListener() {
+		addToToolBar(toolBar, "Draw line", getMyImageIcon("Line"));
+		addToToolBar(toolBar, "Add Text", getMyImageIcon("Text")).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = JOptionPane.showInputDialog(JBView.this,
 					"Text:", "Text", JOptionPane.QUESTION_MESSAGE); 
@@ -86,8 +89,8 @@ public class JBView extends JFrame {
 		});
 		toolBar.addSeparator();
 		toolBar.add(cutAction);
-		addToToolBar(toolBar, "copy").addActionListener(copyAction);
-		addToToolBar(toolBar, "paste").addActionListener(pasteAction);
+		addToToolBar(toolBar, "Copy", getMyImageIcon("copy")).addActionListener(copyAction);
+		addToToolBar(toolBar, "Paste", getMyImageIcon("paste")).addActionListener(pasteAction);
 
 		cp.add(BorderLayout.NORTH, toolBar); 
 		cp.add(BorderLayout.SOUTH,
@@ -111,29 +114,29 @@ public class JBView extends JFrame {
 		ResourceBundle b = ResourceBundle.getBundle("Menus");
 
 		JMenuItem mi;
-		JMenu fm = mkMenu(b, "file");
-		fm.add(mi=mkMenuItem(b, "file", "open"));
+		JMenu fm = I18N.mkMenu(b, "file");
+		fm.add(mi=I18N.mkMenuItem(b, "file", "open"));
 		mi.addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				model.load();
 			}
 		});
-		fm.add(mi=mkMenuItem(b, "file", "new"));
-		fm.add(mi=mkMenuItem(b, "file", "save"));
+		fm.add(mi=I18N.mkMenuItem(b, "file", "new"));
+		fm.add(mi=I18N.mkMenuItem(b, "file", "save"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				model.save();
 			}
 		});
-		fm.add(mi=mkMenuItem(b, "file", "saveas"));
-		fm.add(mi=mkMenuItem(b, "file", "print"));
+		fm.add(mi=I18N.mkMenuItem(b, "file", "saveas"));
+		fm.add(mi=I18N.mkMenuItem(b, "file", "print"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doPrint();
 			}
 		});
 		fm.addSeparator();
-		fm.add(mi = mkMenuItem(b, "file", "exit"));
+		fm.add(mi = I18N.mkMenuItem(b, "file", "exit"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -143,24 +146,24 @@ public class JBView extends JFrame {
 		});
 		mb.add(fm);
 
-		JMenu em = mkMenu(b, "edit");
-		em.add(mi = mkMenuItem(b, "edit", "undo"));
+		JMenu em = I18N.mkMenu(b, "edit");
+		em.add(mi = I18N.mkMenuItem(b, "edit", "undo"));
 		mi.setEnabled(false);
 		em.addSeparator();
-		em.add(mi=mkMenuItem(b, "edit", "cut"));
+		em.add(mi=I18N.mkMenuItem(b, "edit", "cut"));
 		mi.addActionListener(cutAction);
-		em.add(mi=mkMenuItem(b, "edit", "copy"));
+		em.add(mi=I18N.mkMenuItem(b, "edit", "copy"));
 		mi.addActionListener(copyAction);
-		em.add(mi=mkMenuItem(b, "edit", "delete"));
+		em.add(mi=I18N.mkMenuItem(b, "edit", "delete"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				model.delete();
 			}
 		});
-		em.add(mi=mkMenuItem(b, "edit", "paste"));
+		em.add(mi=I18N.mkMenuItem(b, "edit", "paste"));
 		mi.addActionListener(pasteAction);
 		em.addSeparator();
-		em.add(mi=mkMenuItem(b, "edit", "attributes"));
+		em.add(mi=I18N.mkMenuItem(b, "edit", "attributes"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				model.editSelected();
@@ -168,15 +171,15 @@ public class JBView extends JFrame {
 		});
 		mb.add(em);
 
-		JMenu winMenu1 = mkMenu(b, "window");
+		JMenu winMenu1 = I18N.mkMenu(b, "window");
 
-		JMenu palMenu = mkMenu(b, "palettes");
-		// palMenu.add(mi=mkCheckboxMenuItem(b, "palettes", "paintstyle", false));
+		JMenu palMenu = I18N.mkMenu(b, "palettes");
+		// palMenu.add(mi=I18N.mkCheckboxMenuItem(b, "palettes", "paintstyle", false));
 		winMenu1.add(palMenu);
 		mb.add(winMenu1);
 
-		JMenu hm = mkMenu(b, "help");
-		hm.add(mi=mkMenuItem(b, "help", "about"));
+		JMenu hm = I18N.mkMenu(b, "help");
+		hm.add(mi=I18N.mkMenuItem(b, "help", "about"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(JBView.this,
@@ -247,56 +250,33 @@ public class JBView extends JFrame {
 		}
 	}
 
+	/** Convenience routine to get an application-local image */
+	private ImageIcon getMyImageIcon(String name) {
+		String fullName = "images" + '/' + "cut" + ".gif";
+		return getMyIconImage(fullName);
+	}
+
+	/** Convenience routine to get a JLF-standard image */
+	private ImageIcon getJLFImage(String name) {
+		String imgLocation = "toolbarButtonGraphics/" + name + "24.gif";
+		return getMyIconImage(imgLocation);
+	}
+
+	private ImageIcon getMyIconImage(String imgName) {
+		URL imageURL = getClass().getResource(imgName);
+
+		if (imageURL == null) {
+			throw new IllegalArgumentException("No image: " + imgName);
+		}
+		ImageIcon ii = new ImageIcon(imageURL);
+		return ii;
+	}
+
 	/** Convenience routine for building the JToolBar */
-    public JButton addToToolBar(JToolBar toolBar, String name) {
-		JButton b = 
-			new JButton(new ImageIcon("images" + '/' + name + ".gif"));
+    public JButton addToToolBar(JToolBar toolBar, String descr, ImageIcon ii) {
+		JButton b = new JButton(ii);
 		toolBar.add(b);
-		b.setToolTipText(name);
-		// b.setPad(new Insets(0,0,0,0));
+		b.setToolTipText(descr);
 		return b;
     }
-
-	/** Convenience routine to make a Menu */
-	public JMenu mkMenu(ResourceBundle b, String name) {
-		String menuLabel;
-		try { menuLabel = b.getString(name+".label"); }
-		catch (MissingResourceException e) { menuLabel=name; }
-		return new JMenu(menuLabel);
-	}
-
-	/** Convenience routine to make a MenuItem */
-	public JMenuItem mkMenuItem(ResourceBundle b, String menu, String name) {
-		String miLabel;
-		try { miLabel = b.getString(menu + "." + name + ".label"); }
-		catch (MissingResourceException e) { miLabel=name; }
-		String key = null;
-		try { key = b.getString(menu + "." + name + ".key"); }
-		catch (MissingResourceException e) { key=null; }
-
-		if (key == null)
-			return new JMenuItem(miLabel);
-		else
-			return new JMenuItem(miLabel /*, new MenuShortcut(key.charAt(0))*/);
-	}
-
-	/** Convenience routine to make a CheckboxMenuItem; these
-	 * can not have MenuShortcuts
-	 */
-	public CheckboxMenuItem mkCheckboxMenuItem(ResourceBundle b, String menu, String name, boolean setting) {
-		String miLabel;
-		try { miLabel = b.getString(menu + "." + name + ".label"); }
-		catch (MissingResourceException e) { miLabel=name; }
-
-		// Paranoia?
-		String key = null;
-		try {
-			key = b.getString(menu + "." + name + ".key");
-			System.err.println("Warning: shortcut "+key+
-				" for CheckboxMenuItem "+name+" ignored.");
-		}
-		catch (MissingResourceException e) { key=null; }
-
-		return new CheckboxMenuItem(miLabel, setting);
-	}
 }

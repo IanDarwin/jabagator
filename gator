@@ -1,1 +1,1 @@
-java JabaGator $*
+java -classpath build;lib/jlfgr-1_0.jar jabagator.JabaGator $*

@@ -8,6 +8,9 @@
 
 	<property name="deploy.dir" value="${basedir}/deploy"/>
 	<property name="deploy.jar" value="jabagator.jar"/>
+	<property name="darwinsys.jar"
+		value="/home/ian/classes/ext/com-darwinsys-all.jar"/>
+	
 
 	<target name="init">
 		<tstamp/> <!-- Create the time stamp -->
@@ -16,8 +19,7 @@
 
 	<target name="compile" depends="init">
 		<javac srcdir="${src}" destdir="${build}"
-			classpath="/home/ian/classes/ext/com-darwinsys-util.jar"
-			/>
+			classpath="${darwinsys.jar}" />
 	</target>
 
 	<target name="build" depends="compile">

@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import com.darwinsys.util.*;
+import com.darwinsys.swingui.UtilGUI;
 
 /** This is a SKELETON ONLY for a draw program like Illustrator
  * This part just creates the whole mess.
