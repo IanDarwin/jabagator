@@ -1,1 +1,5 @@
-java -classpath build:lib/jlfgr-1_0.jar jabagator.JabaGator $*
+#!/bin/sh
+
+JDDIR=build
+
+java -classpath ${JDDIR}:${JDDIR}/images:${JDDIR}/lib/jlfgr-1_0.jar jabagator.JabaGator $*
