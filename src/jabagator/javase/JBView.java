@@ -44,55 +44,6 @@ public class JBView extends JFrame {
 		// Construct the JToolBar 
 		toolBar = new JToolBar();
 
-		// GRAPHICS ACTIONS
-		Action circleAction = 
-			new IntlAction(b, "graphics.circle", getMyImageIcon("Circle")){
-			public void actionPerformed(ActionEvent e) {
-				GOval g = new GOval();
-				g.setLocation(100, 100);
-				g.setSize(100, 100);
-				model.add(g);
-			}
-		};
-		toolBar.add(circleAction);
-
-		Action rectAction =
-			new IntlAction(b, "graphics.rect", getMyImageIcon("Rectangle")) {
-			public void actionPerformed(ActionEvent e) {
-				GRect g = new GRect();
-				g.setLocation(100, 100);
-				g.setSize(100, 100);
-				model.add(g);
-			}
-		};
-		toolBar.add(rectAction);
-
-		Action drawLineAction =
-			new IntlAction(b, "graphics.line", getMyImageIcon("Line")) {
-			public void actionPerformed(ActionEvent evt) {
-				JOptionPane.showMessageDialog(JBView.this,
-				"Not written yet", "Not written yet",
-				JOptionPane.ERROR_MESSAGE);
-			}
-		};
-		toolBar.add(drawLineAction);
-
-		Action textAction =
-			new IntlAction(b, "graphics.text", getMyImageIcon("Text")) {
-			public void actionPerformed(ActionEvent e) {
-				String text = JOptionPane.showInputDialog(JBView.this,
-					"Text:", "Text", JOptionPane.QUESTION_MESSAGE); 
-				if (text == null)
-					return;
-				GText g = new GText();
-				model.add(g);
-				g.setLocation(100, 100);
-				g.setText(text);
-			}
-		};
-		toolBar.add(textAction);
-		toolBar.addSeparator();
-
 		cp.add(BorderLayout.NORTH, toolBar); 
 		cp.add(BorderLayout.SOUTH,
 			statusLabel = new JLabel("Welcome to JabaGator"));
@@ -160,6 +111,54 @@ public class JBView extends JFrame {
 			}
 		});
 		mb.add(fm);
+
+		// GRAPHICS ACTIONS
+		Action circleAction = 
+			new IntlAction(b, "graphics.circle", getMyImageIcon("Circle")){
+			public void actionPerformed(ActionEvent e) {
+				GOval g = new GOval();
+				g.setLocation(100, 100);
+				g.setSize(100, 100);
+				model.add(g);
+			}
+		};
+		toolBar.add(circleAction);
+
+		Action rectAction =
+			new IntlAction(b, "graphics.rect", getMyImageIcon("Rectangle")) {
+			public void actionPerformed(ActionEvent e) {
+				GRect g = new GRect();
+				g.setLocation(100, 100);
+				g.setSize(100, 100);
+				model.add(g);
+			}
+		};
+		toolBar.add(rectAction);
+
+		Action drawLineAction =
+			new IntlAction(b, "graphics.line", getMyImageIcon("Line")) {
+			public void actionPerformed(ActionEvent evt) {
+				JOptionPane.showMessageDialog(JBView.this,
+				"Not written yet", "Not written yet",
+				JOptionPane.ERROR_MESSAGE);
+			}
+		};
+		toolBar.add(drawLineAction);
+
+		Action textAction =
+			new IntlAction(b, "graphics.text", getMyImageIcon("Text")) {
+			public void actionPerformed(ActionEvent e) {
+				String text = JOptionPane.showInputDialog(JBView.this,
+					"Text:", "Text", JOptionPane.QUESTION_MESSAGE); 
+				if (text == null)
+					return;
+				GText g = new GText();
+				model.add(g);
+				g.setLocation(100, 100);
+				g.setText(text);
+			}
+		};
+		toolBar.add(textAction);
 
 		// EDIT MENU AND ACTIONS
 
