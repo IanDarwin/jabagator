@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 /** jbmcont - JabaGator Mouse Controller
  */
@@ -10,7 +11,7 @@ public class JBCont extends Object
 	/** The view on the model */
 	JBView view;
 	/** true if we are in drag */
-	boolean inDrag = false;
+	boolean inDrag;
 	/** starting location of a drag */
 	int startX = -1, startY = -1;
 	/** current location of a drag */
@@ -39,12 +40,22 @@ public class JBCont extends Object
 	/** Called when the mouse exits the window . */
 	public void mouseExited(MouseEvent e)  {
 	}
+
+	/** The object being worked upon */
+	private GObj selObj;
+
 	/** Called when the mouse has been pressed. */
 	public void mousePressed(MouseEvent e)  {
 		Point p = e.getPoint();
 		startX = p.x; startY = p.y;
-		System.err.println("mousePressed at " + startX + "," + startY);
+		// System.err.println("mousePressed at " + startX + "," + startY);
 		inDrag = true;
+		if (selObj != null)
+			selObj.setSelected(false);
+		selObj = findElement(startX, startY);
+		System.err.println("findElement("+startX+","+startY+")="+selObj);
+		if (selObj != null)
+			selObj.setSelected(true);
 	}
 
 	/** Called when the mouse has been released. */
@@ -65,8 +76,10 @@ public class JBCont extends Object
 		curX = p.x; curY = p.y;
 		showStatus("mouse Dragged to " + curX + "," + curY);
 		// if (inDrag) {
-			GObj o = findElement(startX, startY);
-			o.setXY(curX, curY);
+			if (selObj == null) {
+				return;
+			}
+			selObj.setXY(curX, curY);
 			view.repaint();
 		// }
 	}
@@ -78,8 +91,14 @@ public class JBCont extends Object
 	public void mouseMoved(MouseEvent e) {
 	}
 
+	/** Returns the GObj that contains the given element, if any */
 	public GObj findElement(int oldx, int oldy) {
-		// FAKE
-		return (GObj)(model.v.elementAt(0));
+		Vector v = model.v;
+		for (int i=0; i<v.size(); i++) {
+			GObj j = (GObj)v.elementAt(i);
+				if (j.contains(oldx,oldy))
+					return j;
+		}
+		return null;
 	}
 }
