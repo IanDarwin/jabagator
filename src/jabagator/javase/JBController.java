@@ -54,10 +54,15 @@ public class JBCont extends Object
 		inDrag = true;
 		if (selObj != null)
 			((GObj)selObj).setSelected(false);
-		selObj = findElement(startX, startY);
-		if (selObj != null) {
-			((GObj)selObj).setSelected(true);
+		Component tmpObj = view.getPanel().getComponentAt(startX, startY);
+
+		// If not instanceof GObj, user clicked in panel but not on GObj
+		if (tmpObj != null && tmpObj instanceof GObj) {
+			((GObj)tmpObj).setSelected(true);
 			showStatus("findElement("+startX+","+startY+")="+selObj);
+			selObj = tmpObj;
+		} else {
+			showStatus("");
 		}
 	}
 
@@ -90,18 +95,5 @@ public class JBCont extends Object
 	 * implement MouseMotionListener.
 	 */
 	public void mouseMoved(MouseEvent e) {
-	}
-
-	/** Returns the Component that contains the given element, if any */
-	public Component findElement(int oldx, int oldy) {
-		Iterator it = model.iterator();
-		while (it.hasNext()) {
-			Component j = (Component)it.next();
-			Rectangle r = j.getBounds();
-			if (oldx > r.x && oldx < (r.x + r.width) &&
-				oldy > r.y && oldy < (r.y + r.height))
-				return j;
-		}
-		return null;
 	}
 }

@@ -34,6 +34,10 @@ public class JBView extends JFrame implements AboutBoxHandler,
 	/** Actions */
 	Action cutAction, copyAction, pasteAction;
 
+	public JComponent getPanel() {
+		return panel;
+	}
+
 	/** Construct the object including its GUI */
 	JBView(JBModel m, JComponent c) {
 		super("JabaGator");
@@ -326,7 +330,10 @@ public class JBView extends JFrame implements AboutBoxHandler,
 					// Now (drum roll please), ask "panel" to paint itself
 					// on the printer, by calling its print() method with 
 					// a Printjob Graphics instead of a Window Graphics.
+					boolean wasDoubleBuffered = panel.isDoubleBuffered();
+					//panel.setDoubleBuffered(false);
 					panel.printAll(pg);
+					panel.setDoubleBuffered(wasDoubleBuffered);
 
 					// Tell print system that the page is ready to print
 					return Printable.PAGE_EXISTS;

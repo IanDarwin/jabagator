@@ -9,7 +9,7 @@ import javax.swing.*;
  *
  * Vaguely analogous to Component in java.awt.
  */
-public abstract class GObj extends Component 
+public abstract class GObj extends JComponent 
 	implements Cloneable, java.io.Serializable {
 	/** The UIDL, for serialization. */
 	public static long serialVersionUID=-1842877245453958698L;
