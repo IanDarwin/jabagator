@@ -4,22 +4,22 @@ public class M extends Object {
 	public final static int SCALE=100;
 
 	/** Convert millimetres to units */
-	public static mm2u(int mm) {
+	public static int mm2u(int mm) {
 		return mm;
 	}
 
 	/** Convert units to millimetres */
-	public static u2mm(int units) {
+	public static int u2mm(int units) {
 		return units;
 	}
 
 	/** Convert units to pixels */
-	public static u2p(int units) {
+	public static int u2p(int units) {
 		return units;
 	}
 
 	/** Convert pixels to units */
-	public static p2u(int pix) {
+	public static int p2u(int pix) {
 		return pix;
 	}
 }

@@ -35,8 +35,8 @@ public class JBView extends Frame {
 			public void windowClosing(WindowEvent e) {
 				// if (data.unsavedChanges()
 				//		do a YesNoQuit dialog
-				JBView.this.setVisible(false);
-				JBView.this.dispose();
+				setVisible(false);
+				dispose();
 				System.exit(0);
 			}
 		});
@@ -57,8 +57,8 @@ public class JBView extends Frame {
 		fm.add(mi = mkMenuItem(b, "file", "exit"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JBView.this.setVisible(false);
-				JBView.this.dispose();
+				setVisible(false);
+				dispose();
 				System.exit(0);
 			}
 		});
