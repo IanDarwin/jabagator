@@ -44,38 +44,6 @@ public class JBView extends JFrame {
 		// Construct the JToolBar 
 		toolBar = new JToolBar();
 
-		// TODO put Open, Save, etc. here
-
-		toolBar.addSeparator();
-
-		cutAction = 
-			new IntlAction(b, "edit.cut", getJLFImageIcon("general/Cut")) {
-			public void actionPerformed(ActionEvent e) {
-				model.cut();
-				pasteAction.setEnabled(true);
-			}
-		};
-		toolBar.add(cutAction);
-
-		copyAction = 
-			new IntlAction(b, "edit.copy", getJLFImageIcon("general/Copy")) {
-			public void actionPerformed(ActionEvent e) {
-				model.copy();
-				pasteAction.setEnabled(true);
-			}
-		};
-		toolBar.add(copyAction);
-
-		pasteAction = 
-			new IntlAction(b, "edit.paste", getJLFImageIcon("general/Paste")) {
-			public void actionPerformed(ActionEvent e) {
-				model.paste();
-			}
-		};
-		toolBar.add(pasteAction);
-
-		toolBar.addSeparator();
-
 		// GRAPHICS ACTIONS
 		Action circleAction = 
 			new IntlAction(b, "graphics.circle", getMyImageIcon("Circle")){
@@ -146,19 +114,35 @@ public class JBView extends JFrame {
 
 		JMenuItem mi;
 		JMenu fm = I18N.mkMenu(b, "file");
-		fm.add(mi=I18N.mkMenuItem(b, "file", "open"));
-		mi.addActionListener(new AbstractAction() {
+		Action openAction = new IntlAction(
+			b, "file.open", getJLFImageIcon("general/Open")) {
 			public void actionPerformed(ActionEvent e) {
 				model.load();
 			}
-		});
-		fm.add(mi=I18N.mkMenuItem(b, "file", "new"));
-		fm.add(mi=I18N.mkMenuItem(b, "file", "save"));
-		mi.addActionListener(new ActionListener() {
+		};
+		fm.add(openAction);
+		toolBar.add(openAction);
+
+		Action newAction = new IntlAction(
+			b, "file.new", getJLFImageIcon("general/New")) {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(JBView.this,
+					"Not Written Yet", "Not Written Yet",
+					JOptionPane.ERROR_MESSAGE);
+			}
+		};
+		fm.add(newAction);
+		toolBar.add(newAction);
+
+		Action saveAction = new IntlAction(
+			b, "file.save", getJLFImageIcon("general/Save")) {
 			public void actionPerformed(ActionEvent e) {
 				model.save();
 			}
-		});
+		};
+		fm.add(saveAction);
+		toolBar.add(saveAction);
+
 		fm.add(mi=I18N.mkMenuItem(b, "file", "saveas"));
 		fm.add(mi=I18N.mkMenuItem(b, "file", "print"));
 		mi.addActionListener(new ActionListener() {
@@ -177,23 +161,61 @@ public class JBView extends JFrame {
 		});
 		mb.add(fm);
 
+		// EDIT MENU AND ACTIONS
+
 		JMenu em = I18N.mkMenu(b, "edit");
-		em.add(mi = I18N.mkMenuItem(b, "edit", "undo"));
-		mi.setEnabled(false);
-		em.addSeparator();
-		//em.add(mi=I18N.mkMenuItem(b, "edit", "cut"));
+		mb.add(em);
+		toolBar.addSeparator();
+
+		cutAction = 
+			new IntlAction(b, "edit.cut", getJLFImageIcon("general/Cut")) {
+			public void actionPerformed(ActionEvent e) {
+				model.cut();
+				pasteAction.setEnabled(true);
+			}
+		};
+		toolBar.add(cutAction);
 		em.add(cutAction);
-		mi.addActionListener(cutAction);
-		em.add(mi=I18N.mkMenuItem(b, "edit", "copy"));
-		mi.addActionListener(copyAction);
-		em.add(mi=I18N.mkMenuItem(b, "edit", "delete"));
-		mi.addActionListener(new ActionListener() {
+
+		copyAction = 
+			new IntlAction(b, "edit.copy", getJLFImageIcon("general/Copy")) {
+			public void actionPerformed(ActionEvent e) {
+				model.copy();
+				pasteAction.setEnabled(true);
+			}
+		};
+		toolBar.add(copyAction);
+		em.add(copyAction);
+
+		pasteAction = 
+			new IntlAction(b, "edit.paste", getJLFImageIcon("general/Paste")) {
+			public void actionPerformed(ActionEvent e) {
+				model.paste();
+			}
+		};
+		toolBar.add(pasteAction);
+		em.add(pasteAction);
+
+		em.add(mi = I18N.mkMenuItem(b, "edit", "undo"));
+		Action undoAction = 
+			new IntlAction(b, "edit.undo", getJLFImageIcon("general/Undo")) {
+			public void actionPerformed(ActionEvent e) {
+				// model.undo();
+			}
+		};
+		toolBar.add(undoAction);
+		em.add(undoAction);
+		undoAction.setEnabled(false);
+
+		Action deleteAction = 
+			new IntlAction(b, "edit.delete", getJLFImageIcon("general/Delete")) {
 			public void actionPerformed(ActionEvent e) {
 				model.delete();
 			}
-		});
-		em.add(mi=I18N.mkMenuItem(b, "edit", "paste"));
-		mi.addActionListener(pasteAction);
+		};
+		toolBar.add(deleteAction);
+		em.add(deleteAction);
+
 		em.addSeparator();
 		em.add(mi=I18N.mkMenuItem(b, "edit", "attributes"));
 		mi.addActionListener(new ActionListener() {
@@ -201,18 +223,20 @@ public class JBView extends JFrame {
 				model.editSelected();
 			}
 		});
-		mb.add(em);
 
 		JMenu winMenu1 = I18N.mkMenu(b, "window");
-
-		JMenu palMenu = I18N.mkMenu(b, "palettes");
-		// palMenu.add(mi=I18N.mkCheckboxMenuItem(b, "palettes", "paintstyle", false));
-		winMenu1.add(palMenu);
 		mb.add(winMenu1);
 
+		JMenu palMenu = I18N.mkMenu(b, "palettes");
+		winMenu1.add(palMenu);
+		// palMenu.add(mi=I18N.mkCheckboxMenuItem(b, "palettes", "paintstyle", false));
+
 		JMenu hm = I18N.mkMenu(b, "help");
-		hm.add(mi=I18N.mkMenuItem(b, "help", "about"));
-		mi.addActionListener(new ActionListener() {
+		mb.add(hm);
+		// mb.setHelpMenu(hm);		// needed for portability (Motif, etc.).
+
+		Action aboutAction = 
+			new IntlAction(b, "help.about", getJLFImageIcon("general/About")) {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(JBView.this,
 					"JabaGator(tm), the portable illustration program\n" +
@@ -223,9 +247,9 @@ public class JBView extends JFrame {
 					"dean@gallant.com www.gallant.com/icons.htm",
 					"About JabaGator(tm)", JOptionPane.INFORMATION_MESSAGE);
 			}
-		});
-		mb.add(hm);
-		// mb.setHelpMenu(hm);		// needed for portability (Motif, etc.).
+		};
+		toolBar.add(aboutAction);
+		hm.add(aboutAction);
 
 		// Set initial state of actions
 		pasteAction.setEnabled(false);
