@@ -9,7 +9,7 @@ class GOval extends GObj {
 
 	public String describe() { 
 		Dimension d = getSize();
-		return d.width==d.height?"circl":"oval";
+		return d.width==d.height?"circle":"oval";
 	}
 
 	public void draw(Graphics g) {

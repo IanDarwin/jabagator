@@ -111,9 +111,11 @@ public class JBModel {
 		go.editAttributes();
 	}
 
-	/** Find the currently selected object, if any. */
+	/** Find the currently selected object, if any.
+	 * Should return List, not GObj.
+	 */
 	protected GObj getSelected() {
-		System.out.println("Finding current object...");
+		System.out.println("Finding Selected object...");
 		Iterator it = v.iterator();
 		while (it.hasNext()) {
 			GObj o = (GObj)it.next();

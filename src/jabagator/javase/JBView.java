@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.net.URL;
 
 import com.darwinsys.swingui.I18N;
+import com.darwinsys.swingui.IntlAction;
 
 /** This will become the View part of an MVC.
  * It will display a list of GObjs and paint them.
@@ -29,6 +30,9 @@ public class JBView extends JFrame {
 	JBView(JBModel m, JComponent c) {
 		super("JabaGator");
 
+		// Get the resources for menus, buttons, etc. 
+		ResourceBundle b = ResourceBundle.getBundle("GatorAid");
+
 		panel = c;
 
 		Container cp = getContentPane();
@@ -36,60 +40,77 @@ public class JBView extends JFrame {
 		model = m;
 
 		cp.setLayout(new BorderLayout());
+
+		// Construct the JToolBar 
 		toolBar = new JToolBar();
 
-		ImageIcon ii = getJLFImageIcon("general/Cut");
-		cutAction = new AbstractAction("Cut", ii) {
+		// TODO put Open, Save, etc. here
+
+		toolBar.addSeparator();
+
+		cutAction = 
+			new IntlAction(b, "edit.cut", getJLFImageIcon("general/Cut")) {
 			public void actionPerformed(ActionEvent e) {
 				model.cut();
 				pasteAction.setEnabled(true);
 			}
 		};
-		ii = getJLFImageIcon("general/Copy");
-		copyAction = new AbstractAction("Copy", ii) {
+		toolBar.add(cutAction);
+
+		copyAction = 
+			new IntlAction(b, "edit.copy", getJLFImageIcon("general/Copy")) {
 			public void actionPerformed(ActionEvent e) {
 				model.copy();
 				pasteAction.setEnabled(true);
 			}
 		};
-		ii = getJLFImageIcon("general/Paste");
-		pasteAction = new AbstractAction("Paste", ii) {
+		toolBar.add(copyAction);
+
+		pasteAction = 
+			new IntlAction(b, "edit.paste", getJLFImageIcon("general/Paste")) {
 			public void actionPerformed(ActionEvent e) {
 				model.paste();
 			}
 		};
+		toolBar.add(pasteAction);
 
-		// Construct the JToolBar 
-		JButton jb;
-		jb = addToToolBar(toolBar, "Create Circle", getMyImageIcon("Circle"));
-		jb.addActionListener(new AbstractAction() {
+		toolBar.addSeparator();
+
+		// GRAPHICS ACTIONS
+		Action circleAction = 
+			new IntlAction(b, "graphics.circle", getMyImageIcon("Circle")){
 			public void actionPerformed(ActionEvent e) {
 				GOval g = new GOval();
 				g.setLocation(100, 100);
 				g.setSize(100, 100);
 				model.add(g);
 			}
-		});
-		jb = addToToolBar(toolBar, "Create Rectangle", getMyImageIcon("Rectangle"));
-		jb.addActionListener(new AbstractAction() {
+		};
+		toolBar.add(circleAction);
+
+		Action rectAction =
+			new IntlAction(b, "graphics.rect", getMyImageIcon("Rectangle")) {
 			public void actionPerformed(ActionEvent e) {
 				GRect g = new GRect();
 				g.setLocation(100, 100);
 				g.setSize(100, 100);
 				model.add(g);
 			}
-		});
-		jb = addToToolBar(toolBar, "Draw line", getMyImageIcon("Line"));
-		jb.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
-					JOptionPane.showMessageDialog(JBView.this,
-					"Not written yet", "Not written yet",
-					JOptionPane.ERROR_MESSAGE);
-				}
-			});
+		};
+		toolBar.add(rectAction);
 
-		jb = addToToolBar(toolBar, "Add Text", getMyImageIcon("Text"));
-		jb.addActionListener(new ActionListener() {
+		Action drawLineAction =
+			new IntlAction(b, "graphics.line", getMyImageIcon("Line")) {
+			public void actionPerformed(ActionEvent evt) {
+				JOptionPane.showMessageDialog(JBView.this,
+				"Not written yet", "Not written yet",
+				JOptionPane.ERROR_MESSAGE);
+			}
+		};
+		toolBar.add(drawLineAction);
+
+		Action textAction =
+			new IntlAction(b, "graphics.text", getMyImageIcon("Text")) {
 			public void actionPerformed(ActionEvent e) {
 				String text = JOptionPane.showInputDialog(JBView.this,
 					"Text:", "Text", JOptionPane.QUESTION_MESSAGE); 
@@ -100,13 +121,9 @@ public class JBView extends JFrame {
 				g.setLocation(100, 100);
 				g.setText(text);
 			}
-		});
+		};
+		toolBar.add(textAction);
 		toolBar.addSeparator();
-		toolBar.add(cutAction);
-		//jb = addToToolBar(toolBar, "Copy", getMyImageIcon("copy")).addActionListener(copyAction);
-		//jb = addToToolBar(toolBar, "Paste", getMyImageIcon("paste")).addActionListener(pasteAction);
-		toolBar.add(copyAction);
-		toolBar.add(pasteAction);
 
 		cp.add(BorderLayout.NORTH, toolBar); 
 		cp.add(BorderLayout.SOUTH,
@@ -126,8 +143,6 @@ public class JBView extends JFrame {
 		// Construct the MENU part of the GUI
 		JMenuBar mb = new JMenuBar();
 		setJMenuBar(mb);
-
-		ResourceBundle b = ResourceBundle.getBundle("Menus");
 
 		JMenuItem mi;
 		JMenu fm = I18N.mkMenu(b, "file");

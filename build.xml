@@ -24,7 +24,7 @@
 
 	<target name="build" depends="compile">
 		<!-- Copy the properties there too -->
-		<copy file="Menus.properties" todir="${build}"/>
+		<copy file="GatorAid.properties" todir="${build}"/>
 		<!-- Copy the JLF images there too -->
 		<copy todir="${build}/lib">
 			<fileset dir="${src}/lib"/>
