@@ -1,1 +1,0 @@
-javac -deprecation JabaGator.java
