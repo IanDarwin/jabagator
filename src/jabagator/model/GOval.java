@@ -1,3 +1,5 @@
+package jabagator;
+
 import java.awt.*;
 
 class GOval extends GObj {

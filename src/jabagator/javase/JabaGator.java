@@ -1,5 +1,9 @@
+package jabagator;
+
 import java.awt.*;
 import javax.swing.*;
+
+import com.darwinsys.util.*;
 
 /** This is a SKELETON ONLY for a draw program like Illustrator
  * This part just creates the whole mess.

@@ -1,3 +1,5 @@
+package jabagator;
+
 /** Class to do with Measurement */
 public class M extends Object {
 	/** The number of units in a millimetre */
