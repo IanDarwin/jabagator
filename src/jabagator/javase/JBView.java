@@ -38,27 +38,31 @@ public class JBView extends JFrame {
 		cp.setLayout(new BorderLayout());
 		toolBar = new JToolBar();
 
-		ImageIcon ii = getMyImageIcon("cut");
-		cutAction = new AbstractAction("", ii) {
+		ImageIcon ii = getJLFImageIcon("general/Cut");
+		cutAction = new AbstractAction("Cut", ii) {
 			public void actionPerformed(ActionEvent e) {
 				model.cut();
 				pasteAction.setEnabled(true);
 			}
 		};
-		copyAction = new AbstractAction() {
+		ii = getJLFImageIcon("general/Copy");
+		copyAction = new AbstractAction("Copy", ii) {
 			public void actionPerformed(ActionEvent e) {
 				model.copy();
 				pasteAction.setEnabled(true);
 			}
 		};
-		pasteAction = new AbstractAction() {
+		ii = getJLFImageIcon("general/Paste");
+		pasteAction = new AbstractAction("Paste", ii) {
 			public void actionPerformed(ActionEvent e) {
 				model.paste();
 			}
 		};
 
 		// Construct the JToolBar 
-		addToToolBar(toolBar, "Create Circle", getMyImageIcon("Circle")).addActionListener(new AbstractAction() {
+		JButton jb;
+		jb = addToToolBar(toolBar, "Create Circle", getMyImageIcon("Circle"));
+		jb.addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				GOval g = new GOval();
 				g.setLocation(100, 100);
@@ -66,7 +70,8 @@ public class JBView extends JFrame {
 				model.add(g);
 			}
 		});
-		addToToolBar(toolBar, "Create Rectangle", getMyImageIcon("Rectangle")).addActionListener(new AbstractAction() {
+		jb = addToToolBar(toolBar, "Create Rectangle", getMyImageIcon("Rectangle"));
+		jb.addActionListener(new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				GRect g = new GRect();
 				g.setLocation(100, 100);
@@ -74,8 +79,17 @@ public class JBView extends JFrame {
 				model.add(g);
 			}
 		});
-		addToToolBar(toolBar, "Draw line", getMyImageIcon("Line"));
-		addToToolBar(toolBar, "Add Text", getMyImageIcon("Text")).addActionListener(new ActionListener() {
+		jb = addToToolBar(toolBar, "Draw line", getMyImageIcon("Line"));
+		jb.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					JOptionPane.showMessageDialog(JBView.this,
+					"Not written yet", "Not written yet",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			});
+
+		jb = addToToolBar(toolBar, "Add Text", getMyImageIcon("Text"));
+		jb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = JOptionPane.showInputDialog(JBView.this,
 					"Text:", "Text", JOptionPane.QUESTION_MESSAGE); 
@@ -89,8 +103,10 @@ public class JBView extends JFrame {
 		});
 		toolBar.addSeparator();
 		toolBar.add(cutAction);
-		addToToolBar(toolBar, "Copy", getMyImageIcon("copy")).addActionListener(copyAction);
-		addToToolBar(toolBar, "Paste", getMyImageIcon("paste")).addActionListener(pasteAction);
+		//jb = addToToolBar(toolBar, "Copy", getMyImageIcon("copy")).addActionListener(copyAction);
+		//jb = addToToolBar(toolBar, "Paste", getMyImageIcon("paste")).addActionListener(pasteAction);
+		toolBar.add(copyAction);
+		toolBar.add(pasteAction);
 
 		cp.add(BorderLayout.NORTH, toolBar); 
 		cp.add(BorderLayout.SOUTH,
@@ -150,7 +166,8 @@ public class JBView extends JFrame {
 		em.add(mi = I18N.mkMenuItem(b, "edit", "undo"));
 		mi.setEnabled(false);
 		em.addSeparator();
-		em.add(mi=I18N.mkMenuItem(b, "edit", "cut"));
+		//em.add(mi=I18N.mkMenuItem(b, "edit", "cut"));
+		em.add(cutAction);
 		mi.addActionListener(cutAction);
 		em.add(mi=I18N.mkMenuItem(b, "edit", "copy"));
 		mi.addActionListener(copyAction);
@@ -184,9 +201,10 @@ public class JBView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(JBView.this,
 					"JabaGator(tm), the portable illustration program\n" +
-					"Copyright (c) 1999, 2000 Ian F. Darwin\n" +
-					"ian@darwinsys.com, www.darwinsys.com/freeware\n" +
-					"Some icons  Copyright(C) 1998  by  Dean S. Jones\n" +
+					"Copyright (c) 1999-2003 Ian F. Darwin\n" +
+					"http://www.darwinsys.com/\n" +
+					"Icons from the Sun JLF Image Repository (c) Sun Micro.\n"+
+					"Other icons Copyright(C) 1998  by  Dean S. Jones\n" +
 					"dean@gallant.com www.gallant.com/icons.htm",
 					"About JabaGator(tm)", JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -252,17 +270,17 @@ public class JBView extends JFrame {
 
 	/** Convenience routine to get an application-local image */
 	private ImageIcon getMyImageIcon(String name) {
-		String fullName = "images" + '/' + "cut" + ".gif";
-		return getMyIconImage(fullName);
+		String fullName = "/images" + '/' + name + ".gif";
+		return getMyImage(fullName);
 	}
 
 	/** Convenience routine to get a JLF-standard image */
-	private ImageIcon getJLFImage(String name) {
-		String imgLocation = "toolbarButtonGraphics/" + name + "24.gif";
-		return getMyIconImage(imgLocation);
+	private ImageIcon getJLFImageIcon(String name) {
+		String imgLocation = "/toolbarButtonGraphics/" + name + "24.gif";
+		return getMyImage(imgLocation);
 	}
 
-	private ImageIcon getMyIconImage(String imgName) {
+	private ImageIcon getMyImage(String imgName) {
 		URL imageURL = getClass().getResource(imgName);
 
 		if (imageURL == null) {

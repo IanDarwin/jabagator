@@ -25,10 +25,20 @@
 	<target name="build" depends="compile">
 		<!-- Copy the properties there too -->
 		<copy file="Menus.properties" todir="${build}"/>
-		<!-- Finally, copy the images there too -->
+		<!-- Copy the JLF images there too -->
+		<copy todir="${build}/lib">
+			<fileset dir="${src}/lib"/>
+		</copy>
+		<!-- Copy the local images there too -->
 		<copy todir="${build}/images">
 			<fileset dir="${src}/images"/>
 		</copy>
+	</target>
+
+	<target name="try" depends="build">
+		<echo message="Doesn't work until you get the Apple GUI jar in"/>
+		<java classname="jabagator.JabaGator"
+			classpath="${build}:${build}/lib/jlfgr-1_0.jar:${darwinsys.jar}"/>
 	</target>
 
 	<target name="jar" depends="compile">
