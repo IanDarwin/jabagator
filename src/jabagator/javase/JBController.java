@@ -26,7 +26,7 @@ public class JBCont extends Object
 	}
 
 	public void showStatus(String s) {
-		System.out.println(s);
+		view.showStatus(s);
 	}
 
 	// Five methods from MouseListener:
@@ -48,23 +48,24 @@ public class JBCont extends Object
 	public void mousePressed(MouseEvent e)  {
 		Point p = e.getPoint();
 		startX = p.x; startY = p.y;
-		// System.err.println("mousePressed at " + startX + "," + startY);
+		showStatus("mousePressed at " + startX + "," + startY);
 		inDrag = true;
 		if (selObj != null)
 			selObj.setSelected(false);
 		selObj = findElement(startX, startY);
-		System.err.println("findElement("+startX+","+startY+")="+selObj);
-		if (selObj != null)
+		if (selObj != null) {
 			selObj.setSelected(true);
+			showStatus("findElement("+startX+","+startY+")="+selObj);
+		}
 	}
 
 	/** Called when the mouse has been released. */
 	public void mouseReleased(MouseEvent e)  {
 		// If we just finished a drag, the view needs
 		// to be refreshed.
-		if (inDrag) {
-			showStatus("drag ended");
-		}
+		// if (inDrag) {
+		//	showStatus("drag ended");
+		// }
 		inDrag = false;
 	}
 
@@ -75,13 +76,11 @@ public class JBCont extends Object
 		Point p = e.getPoint();
 		curX = p.x; curY = p.y;
 		showStatus("mouse Dragged to " + curX + "," + curY);
-		// if (inDrag) {
-			if (selObj == null) {
-				return;
-			}
-			selObj.setXY(curX, curY);
-			view.repaint();
-		// }
+		if (selObj == null) {
+			return;
+		}
+		selObj.setLocation(curX, curY);
+		view.repaint();
 	}
 
 	/** Called by AWT when the mouse is moved with no buttons down;
@@ -93,11 +92,13 @@ public class JBCont extends Object
 
 	/** Returns the GObj that contains the given element, if any */
 	public GObj findElement(int oldx, int oldy) {
-		Vector v = model.v;
-		for (int i=0; i<v.size(); i++) {
-			GObj j = (GObj)v.elementAt(i);
-				if (j.contains(oldx,oldy))
-					return j;
+		Iterator it = model.iterator();
+		while (it.hasNext()) {
+			GObj j = (GObj)it.next();
+			Rectangle r = j.getBounds();
+			if (oldx > r.x && oldx < (r.x + r.width) &&
+				oldy > r.y && oldy < (r.y + r.height))
+				return j;
 		}
 		return null;
 	}

@@ -1,77 +1,91 @@
 import java.awt.*;
+import java.awt.geom.*;
+import javax.swing.*;
 
 /**
  * Top level of Graphical Objects that JabaGator knows about.
  *
  * Vaguely analogous to Component in java.awt.
  */
-public abstract class GObj extends Object {
-	/** The current position in units */
-	int x;
-	/** The current position in units */
-	int y;
-	/** The current size in units */
-	int w;
-	/** The current size in units */
-	int h;
-
-	static Component view;
-
-	static void setView(Component c) {
-		view = c;
-	}
+public abstract class GObj extends Component 
+	implements Cloneable, java.io.Serializable {
+	/** The UIDL, for serialization. */
+	public static long serialVersionUID=-1842877245453958698L;
+	/** The size of a control point. */
+	final static int CP_SIZE = 4;
+	/** The control points */
+	Point2D[] ctlPoints;
+	/** How many of same. May be <= ctlPoints.length. */
+	int nCtlPoints;
 
 	GObj() {
-		if (view == null)
-			throw new IllegalArgumentException(
-				"Must setView() before constructing any GObj");
-
-		x = y = w = h = 0;
+		ctlPoints = new Point2D[4];	// adequate for most.
+		nCtlPoints = 0;
 	}
 
-	/** some methods... */
-	abstract void draw(Graphics g);
+	/** What kind of thing this is. */
+	public abstract String describe();
 
 	/** If this object is selected */
-	protected boolean selected;
+	protected transient boolean selected;
 
 	public void setSelected(boolean b) {
+		if (selected == b)
+			return;		// save unnecessary repaints
 		selected = b;
+		repaint();
 	}
+
 	public boolean isSelected() {
 		return selected;
 	}
-	void doColor(Graphics g) {
+
+	/** paint -- do selection color and control points, then draw(). */
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D)g;
 		if (selected)
-			g.setColor(Color.blue);
+			g2.setColor(Color.blue);
 		else
-			g.setColor(Color.black);
+			g2.setColor(Color.black);
+		for (int i=0; i<nCtlPoints; i++)
+			g2.fill(getControlPoint(ctlPoints[i]));
+		draw(g);
+	}
+
+	/** print -- just calls draw() directly. */
+	public void print(Graphics g) {
+		g.setColor(Color.black);	// interim
+		draw(g);
+	}
+
+	/** draw -- common code for paint & print -- draw the object. */
+	protected abstract void draw(Graphics g);
+
+	/** Edit the Attributes. */
+	public void editAttributes() {
+		JOptionPane.showMessageDialog(null,
+			"GObj Editor: not written yet", "GObj",
+			JOptionPane.WARNING_MESSAGE);
 	}
 
 	/** Get the Parameter String (name+main values) of this GObj */
-	public String getParamString() {
-		return this+"[@"+x+","+y+";w="+w+",h="+h;
+	public String toString() {
+		Rectangle b = getBounds();
+		return getClass()+"[@"+b.x+","+b.y+";w="+b.width+",h="+b.height+"]";
 	}
 
-	/** Return true if the object contains the point */
-	boolean contains(int cx, int cy) {
-		System.out.println(getParamString()+".contains("+cx+","+cy+")");
-		return (cx>=x && cx<=(x+w) &&
-				cy>=y && cy<=(y+h));
+	/** Clone. Object.clone is protected, so you must write this
+	 * method even if it has nothing to do other than call super.clone().
+	 */
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
-	void setXY(int nx, int ny) {
-		x = nx;
-		y = ny;
-		System.out.println("GObj " + this + " moveto " + x + "," + y);
+	/** Return a small box around a control point.
+	 * @author Jonathan Knudsen, in O'Reilly's <I>Java 2D</I> book.
+	 */
+	protected Shape getControlPoint(Point2D p) {
+		return new Rectangle2D.Double(
+			p.getX() - CP_SIZE / 2, p.getY() - CP_SIZE / 2, CP_SIZE, CP_SIZE);
 	}
-	Dimension getXY() {
-		return new Dimension(x,y);
-	}
-	void setWH(int nw, int nh) {
-		w = nw;
-		h = nh;
-	}
-
 }
-

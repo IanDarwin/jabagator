@@ -1,3 +1,6 @@
+import java.awt.*;
+import javax.swing.*;
+
 /** This is a SKELETON ONLY for a draw program like Illustrator
  * This part just creates the whole mess.
  */
@@ -9,17 +12,21 @@ public class JabaGator {
 		JBModel m = new JBModel();
 
 		// create a JBView object, tell it to show up
-		JBView v = new JBView(m, 500,400);
-		v.setVisible(true);
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.white);
+		panel.setLayout(null);
 
-		GObj.setView(v);		// model & view cohabit
+		// JBView is a Frame.
+		JBView view = new JBView(m, panel);
+		view.setSize(500, 400);
+		UtilGUI.centre(view);
+		view.setVisible(true);
 
-		m.fakeObjs();		// construct a few objects to start
+		m.setView(view);			// interconnect
 
 		// connect the Controller
-		JBCont c = new JBCont(m, v);
-		v.addMouseListener(c);
-		v.addMouseMotionListener(c);
+		JBCont c = new JBCont(m, view);
+		panel.addMouseListener(c);
+		panel.addMouseMotionListener(c);
 	}
 }
-
