@@ -1,4 +1,18 @@
-Load and save in SVG.
+Short Term
+----------
+
+Use Component.findChildAt() to locate active.
+
+Keep offset from obj origin so can move at any point
+(avoid jerk when start move)
+
+Use Swing Actions throughout the View/Controller - mostly done.
+
+Longer Term
+-----------
+Split into model and swingui packages.
+
+Load and save in SVG. Filename chooser.
 
 Add "create()" method for interactive creation of objects.
 
