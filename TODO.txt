@@ -1,0 +1,10 @@
+Load and save in SVG.
+
+Add "create()" method for interactive creation of objects.
+
+Add "resize()".
+
+Add Properties editor for GObjects.
+
+When you have all that done, it's no longer just a toy,
+but a real demo program.
