@@ -10,10 +10,18 @@ import java.net.URL;
 import com.darwinsys.swingui.I18N;
 import com.darwinsys.swingui.IntlAction;
 
+import com.darwinsys.macosui.AboutBoxHandler;
+import com.darwinsys.macosui.PrefsHandler;
+import com.darwinsys.macosui.PrintHandler;
+import com.darwinsys.macosui.ShutdownHandler;
+import com.darwinsys.macosui.MacOSUtil;
+
 /** This will become the View part of an MVC.
  * It will display a list of GObjs and paint them.
  */
-public class JBView extends JFrame {
+public class JBView extends JFrame implements AboutBoxHandler,
+	PrefsHandler, PrintHandler, ShutdownHandler {
+
 	final int PAD = 10;
 	/** For showStatus() */
 	JLabel statusLabel;
@@ -94,23 +102,34 @@ public class JBView extends JFrame {
 		fm.add(saveAction);
 		toolBar.add(saveAction);
 
-		fm.add(mi=I18N.mkMenuItem(b, "file", "saveas"));
-		fm.add(mi=I18N.mkMenuItem(b, "file", "print"));
-		mi.addActionListener(new ActionListener() {
+		Action saveAsAction = new IntlAction(
+			b, "file.saveas", getJLFImageIcon("general/SaveAs")) {
 			public void actionPerformed(ActionEvent e) {
-				doPrint();
+				model.save();
 			}
-		});
+		};
+		fm.add(saveAsAction);
+		toolBar.add(saveAsAction);
+
+		Action printAction = new IntlAction(
+			b, "file.print", getJLFImageIcon("general/Print")) {
+			public void actionPerformed(ActionEvent e) {
+				doPrint(JBView.this);
+			}
+		};
+		fm.add(printAction);
+		toolBar.add(printAction);
+
 		fm.addSeparator();
 		fm.add(mi = I18N.mkMenuItem(b, "file", "exit"));
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				dispose();
-				System.exit(0);
+				shutdown(JBView.this);
 			}
 		});
 		mb.add(fm);
+
+		toolBar.addSeparator();
 
 		// GRAPHICS ACTIONS
 		Action circleAction = 
@@ -160,11 +179,12 @@ public class JBView extends JFrame {
 		};
 		toolBar.add(textAction);
 
+		toolBar.addSeparator();
+
 		// EDIT MENU AND ACTIONS
 
 		JMenu em = I18N.mkMenu(b, "edit");
 		mb.add(em);
-		toolBar.addSeparator();
 
 		cutAction = 
 			new IntlAction(b, "edit.cut", getJLFImageIcon("general/Cut")) {
@@ -236,11 +256,14 @@ public class JBView extends JFrame {
 		Action aboutAction = 
 			new IntlAction(b, "help.about", getJLFImageIcon("general/About")) {
 			public void actionPerformed(ActionEvent e) {
-				showAboutBox();
+				showAboutBox(JBView.this);
 			}
 		};
+		// On Mac OS X, only put the icon, not in Help->About.
+		if (!MacOSUtil.isMacOS()) {
+			hm.add(aboutAction);
+		}
 		toolBar.add(aboutAction);
-		hm.add(aboutAction);
 
 		// Set initial state of actions
 		pasteAction.setEnabled(false);
@@ -251,8 +274,8 @@ public class JBView extends JFrame {
 		pack();
 	}
 
-	public void showAboutBox() {
-		JOptionPane.showMessageDialog(JBView.this,
+	public void showAboutBox(JFrame jf) {
+		JOptionPane.showMessageDialog(jf,
 			"JabaGator(tm), the portable illustration program\n" +
 			"Copyright (c) 1999-2003 Ian F. Darwin\n" +
 			"http://www.darwinsys.com/\n" +
@@ -260,6 +283,18 @@ public class JBView extends JFrame {
 			"Other icons Copyright(C) 1998  by  Dean S. Jones\n" +
 			"dean@gallant.com www.gallant.com/icons.htm",
 			"About JabaGator(tm)", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void showPrefsDialog(JFrame jf) {
+		JOptionPane.showMessageDialog(jf,
+			"Someday there will be a preferences dialog here", "Preferences", 
+			JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void shutdown(JFrame jf) {
+		setVisible(false);
+		dispose();
+		System.exit(0);
 	}
 
 	public void addGObj(GObj g) {
@@ -276,7 +311,7 @@ public class JBView extends JFrame {
 		statusLabel.setText(s);
 	}
 
-	protected void doPrint() {
+	public void doPrint(JFrame parent) {
 		try {
 			PrinterJob pjob = PrinterJob.getPrinterJob();
 			pjob.setJobName("JabaGator - " + "Untitled1");

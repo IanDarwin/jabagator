@@ -1,6 +1,5 @@
 Short Term
 ----------
-
 Use Component.findChildAt() to locate active.
 
 Keep offset from obj origin so can move at any point
@@ -10,7 +9,9 @@ Use Swing Actions throughout the View/Controller - mostly done.
 
 Longer Term
 -----------
-Split into model and swingui packages.
+Use Lists more: selection, for example.
+
+Split into model and view packages.
 
 Load and save in SVG. Filename chooser.
 

@@ -44,7 +44,7 @@ public class JBCont extends Object
 	}
 
 	/** The object being worked upon */
-	private GObj selObj;
+	private Component selObj;
 
 	/** Called when the mouse has been pressed. */
 	public void mousePressed(MouseEvent e)  {
@@ -53,10 +53,10 @@ public class JBCont extends Object
 		showStatus("mousePressed at " + startX + "," + startY);
 		inDrag = true;
 		if (selObj != null)
-			selObj.setSelected(false);
+			((GObj)selObj).setSelected(false);
 		selObj = findElement(startX, startY);
 		if (selObj != null) {
-			selObj.setSelected(true);
+			((GObj)selObj).setSelected(true);
 			showStatus("findElement("+startX+","+startY+")="+selObj);
 		}
 	}
@@ -92,11 +92,11 @@ public class JBCont extends Object
 	public void mouseMoved(MouseEvent e) {
 	}
 
-	/** Returns the GObj that contains the given element, if any */
-	public GObj findElement(int oldx, int oldy) {
+	/** Returns the Component that contains the given element, if any */
+	public Component findElement(int oldx, int oldy) {
 		Iterator it = model.iterator();
 		while (it.hasNext()) {
-			GObj j = (GObj)it.next();
+			Component j = (Component)it.next();
 			Rectangle r = j.getBounds();
 			if (oldx > r.x && oldx < (r.x + r.width) &&
 				oldy > r.y && oldy < (r.y + r.height))
