@@ -1,0 +1,41 @@
+<project name="JabaGator" default="build" basedir=".">
+
+	<!-- $Id$ -->
+
+	<property name="src" value="."/>
+	<property name="build" value="build"/>
+	<property name="build.compiler" value="jikes"/>
+
+	<property name="deploy.dir" value="${basedir}/deploy"/>
+	<property name="deploy.jar" value="jabagator.jar"/>
+
+	<target name="init">
+		<tstamp/> <!-- Create the time stamp -->
+		<mkdir dir="${build}"/> <!-- Create build directory for compile -->
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}"
+			classpath="/home/ian/classes/ext/com-darwinsys-util.jar"
+			/>
+	</target>
+
+	<target name="build" depends="compile">
+		<!-- Copy the properties there too -->
+		<copy file="Menus.properties" todir="${build}"/>
+		<!-- Finally, copy the images there too -->
+		<copy todir="${build}/images">
+			<fileset dir="${src}/images"/>
+		</copy>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar jarfile="${build}/${deploy.jar}" basedir="${build}"
+			includes="META-INF/*,com/**">
+		</jar>
+	</target>
+
+	<target name="deploy" depends="jar">
+	<copy file="${build}/${deploy.jar}" todir="${deploy.dir}"/>
+	</target>
+</project>
