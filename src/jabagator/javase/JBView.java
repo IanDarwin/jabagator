@@ -15,6 +15,9 @@ public class JBView extends Frame {
 	JBModel model;
 	/** The vector of objects in the model */
 	Vector v;
+	// The Toolbar - part of JFC
+	// JToolBar toolBar = new JToolBar();
+
 
 	/** Construct the object including its GUI */
 	JBView(JBModel m, int w, int h) {
@@ -37,6 +40,7 @@ public class JBView extends Frame {
 				System.exit(0);
 			}
 		});
+
 		// Construct the MENU part of the GUI
 		MenuBar mb = new MenuBar();
 		setMenuBar(mb);
@@ -45,10 +49,10 @@ public class JBView extends Frame {
 
 		MenuItem mi;
 		Menu fm = mkMenu(b, "file");
-		fm.add(mkMenuItem(b, "file", "open"));
-		fm.add(mkMenuItem(b, "file", "new"));
-		fm.add(mkMenuItem(b, "file", "save"));
-		fm.add(mkMenuItem(b, "file", "saveas"));
+		fm.add(mi=mkMenuItem(b, "file", "open"));
+		fm.add(mi=mkMenuItem(b, "file", "new"));
+		fm.add(mi=mkMenuItem(b, "file", "save"));
+		fm.add(mi=mkMenuItem(b, "file", "saveas"));
 		fm.addSeparator();
 		fm.add(mi = mkMenuItem(b, "file", "exit"));
 		mi.addActionListener(new ActionListener() {
@@ -63,26 +67,47 @@ public class JBView extends Frame {
 		Menu vm = mkMenu(b, "edit");
 		vm.add(mkMenuItem(b, "edit", "undo"));
 		vm.addSeparator();
-		vm.add(mkMenuItem(b, "edit", "cut"));
-		vm.add(mkMenuItem(b, "edit", "copy"));
-		vm.add(mkMenuItem(b, "edit", "delete"));
-		vm.add(mkMenuItem(b, "edit", "paste"));
+		vm.add(mi=mkMenuItem(b, "edit", "cut"));
+		vm.add(mi=mkMenuItem(b, "edit", "copy"));
+		vm.add(mi=mkMenuItem(b, "edit", "delete"));
+		mi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model.delete();
+			}
+		});
+		vm.add(mi=mkMenuItem(b, "edit", "paste"));
 		mb.add(vm);
 
 		Menu winMenu1 = mkMenu(b, "window");
 		Menu palMenu = mkMenu(b, "palettes");
-		palMenu.add(mkCheckboxMenuItem(b, "palettes", "paintstyle", false));
+		palMenu.add(mi=mkCheckboxMenuItem(b, "palettes", "paintstyle", false));
 		winMenu1.add(palMenu);
 		mb.add(winMenu1);
 
 		Menu hm = mkMenu(b, "help");
-		hm.add(mkMenuItem(b, "help", "about"));
+		hm.add(mi=mkMenuItem(b, "help", "about"));
 		mb.add(hm);
 		mb.setHelpMenu(hm);		// needed for portability (Motif, etc.).
 
 		pack();
 
+		// Construct the TOOLBAR part of the GUI - needs JFC
+		// addTool(toolBar, "new");
+		// addTool(toolBar, "open");
+		// addTool(toolBar, "save");
+		// toolBar.addSeparator();
+		// addTool(toolBar, "cut");
+		// addTool(toolBar, "copy");
+		// addTool(toolBar, "paste");
 	}
+
+	// Convenience routine for building the Toolbar - needs JFC
+    // public void addTool(JToolBar toolBar, String name) {
+	// JButton b = (JButton) toolBar.add(
+	//	new JButton(new ImageGlyph("images/" + name + ".gif")));
+	// b.setToolTipText(name);
+	// b.setPad(new Insets(0,0,0,0));
+    // }
 
 	/** Convenience routine to make a Menu */
 	public Menu mkMenu(ResourceBundle b, String name) {
@@ -137,7 +162,7 @@ public class JBView extends Frame {
 	public void paint(Graphics g) {
 		for (int i = 0; i<v.size(); i++) {
 			GObj j = (GObj)(v.elementAt(i));
-			System.out.println("Drawing " + j);
+			// System.out.println("Drawing " + j);
 			j.draw(g);
 		}
 	}
