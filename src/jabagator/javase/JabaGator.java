@@ -9,12 +9,17 @@ public class JabaGator {
 		JBModel m = new JBModel();
 
 		// create a JBView object, tell it to show up
-		JBView v = new JBView(m, 400,300);
+		JBView v = new JBView(m, 500,400);
 		v.setVisible(true);
 
+		GObj.setView(v);		// model & view cohabit
+
+		m.fakeObjs();		// construct a few objects to start
+
 		// connect the Controller
-		v.addMouseListener(new JBCont(m, v));
-		v.addMouseMotionListener(new JBCont(m, v));
+		JBCont c = new JBCont(m, v);
+		v.addMouseListener(c);
+		v.addMouseMotionListener(c);
 	}
 }
 
