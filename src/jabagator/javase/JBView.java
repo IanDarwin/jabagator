@@ -195,7 +195,6 @@ public class JBView extends JFrame {
 		toolBar.add(pasteAction);
 		em.add(pasteAction);
 
-		em.add(mi = I18N.mkMenuItem(b, "edit", "undo"));
 		Action undoAction = 
 			new IntlAction(b, "edit.undo", getJLFImageIcon("general/Undo")) {
 			public void actionPerformed(ActionEvent e) {
@@ -237,14 +236,7 @@ public class JBView extends JFrame {
 		Action aboutAction = 
 			new IntlAction(b, "help.about", getJLFImageIcon("general/About")) {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(JBView.this,
-					"JabaGator(tm), the portable illustration program\n" +
-					"Copyright (c) 1999-2003 Ian F. Darwin\n" +
-					"http://www.darwinsys.com/\n" +
-					"Icons from the Sun JLF Image Repository (c) Sun Micro.\n"+
-					"Other icons Copyright(C) 1998  by  Dean S. Jones\n" +
-					"dean@gallant.com www.gallant.com/icons.htm",
-					"About JabaGator(tm)", JOptionPane.INFORMATION_MESSAGE);
+				showAboutBox();
 			}
 		};
 		toolBar.add(aboutAction);
@@ -257,6 +249,17 @@ public class JBView extends JFrame {
 		cp.add(BorderLayout.CENTER, c);
 
 		pack();
+	}
+
+	public void showAboutBox() {
+		JOptionPane.showMessageDialog(JBView.this,
+			"JabaGator(tm), the portable illustration program\n" +
+			"Copyright (c) 1999-2003 Ian F. Darwin\n" +
+			"http://www.darwinsys.com/\n" +
+			"Icons from the Sun JLF Image Repository (c) Sun Micro.\n"+
+			"Other icons Copyright(C) 1998  by  Dean S. Jones\n" +
+			"dean@gallant.com www.gallant.com/icons.htm",
+			"About JabaGator(tm)", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void addGObj(GObj g) {

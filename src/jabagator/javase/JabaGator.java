@@ -6,12 +6,18 @@ import javax.swing.*;
 import com.darwinsys.util.*;
 import com.darwinsys.swingui.UtilGUI;
 
+import jabagator.macosui.MacOSAppHandler;
+
 /** This is a SKELETON ONLY for a draw program like Illustrator
  * This part just creates the whole mess.
  */
 public class JabaGator {
 	/** "main program" method - construct and show */
 	public static void main(String av[]) {
+
+		if (UtilGUI.isMacOS()) {
+			UtilGUI.setMacOS("JabaGator");
+		}
 
 		// create a JBModel object
 		JBModel m = new JBModel();
@@ -23,6 +29,9 @@ public class JabaGator {
 
 		// JBView is a Frame.
 		JBView view = new JBView(m, panel);
+		if (UtilGUI.isMacOS()) {
+			new MacOSAppHandler(view).register();
+		}
 		view.setSize(500, 400);
 		UtilGUI.centre(view);
 		view.setVisible(true);
