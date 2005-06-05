@@ -1,13 +1,14 @@
 package jabagator;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
 
-import com.darwinsys.util.*;
-import com.darwinsys.swingui.UtilGUI;
-import com.darwinsys.macosui.*;
+import javax.swing.JPanel;
+
+import jabagator.*;
 
 import com.darwinsys.macosui.MacOSAppAdapter;
+import com.darwinsys.macosui.MacOSUtil;
+import com.darwinsys.swingui.UtilGUI;
 
 /** This is a SKELETON ONLY for a draw program like Illustrator
  * This part just creates the whole mess.
