@@ -39,7 +39,7 @@ public class JBView extends JFrame implements AboutBoxHandler,
 	}
 
 	/** Construct the object including its GUI */
-	JBView(JBModel m, JComponent c) {
+	public JBView(JBModel m, JComponent c) {
 		super("JabaGator");
 
 		// Get the resources for menus, buttons, etc. 
