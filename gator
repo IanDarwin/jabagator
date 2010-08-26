@@ -2,4 +2,4 @@
 
 JDDIR=build
 
-java -classpath ${JDDIR}:${JDDIR}/images:${JDDIR}/lib/jlfgr-1_0.jar jabagator.JabaGator $*
+java -classpath ${JDDIR}:${JDDIR}/images:${JDDIR}/lib/jlfgr-1_0.jar:${JDDIR}/lib/darwinsys.jar main.JabaGator $*
