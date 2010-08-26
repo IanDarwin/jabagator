@@ -15,8 +15,7 @@ import com.darwinsys.swingui.IntlAction;
 /** This will become the View part of an MVC.
  * It will display a list of GObjs and paint them.
  */
-public class JBView extends JFrame implements AboutBoxHandler,
-	PrefsHandler, PrintHandler, ShutdownHandler {
+public class JBView extends JFrame {
 
 	final int PAD = 10;
 	/** For showStatus() */
@@ -34,7 +33,7 @@ public class JBView extends JFrame implements AboutBoxHandler,
 		return panel;
 	}
 
-	/** Construct the object including its GUI */
+	/** Construct the main view object (GUI layer) */
 	public JBView(JBModel m, JComponent c) {
 		super("JabaGator");
 
@@ -56,7 +55,7 @@ public class JBView extends JFrame implements AboutBoxHandler,
 		cp.add(BorderLayout.SOUTH,
 			statusLabel = new JLabel("Welcome to JabaGator"));
 
-        addWindowListener(new WindowAdapter() {
+		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				// if (m.unsavedChanges())
 				//		do a YesNoQuit dialog
@@ -366,10 +365,10 @@ public class JBView extends JFrame implements AboutBoxHandler,
 	}
 
 	/** Convenience routine for building the JToolBar */
-    public JButton addToToolBar(JToolBar toolBar, String descr, ImageIcon ii) {
+	public JButton addToToolBar(JToolBar toolBar, String descr, ImageIcon ii) {
 		JButton b = new JButton(ii);
 		toolBar.add(b);
 		b.setToolTipText(descr);
 		return b;
-    }
+	}
 }
