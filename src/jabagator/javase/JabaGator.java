@@ -21,10 +21,10 @@ public class JabaGator {
 
 		// create a JBView object, tell it to show up
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.white);
+		panel.setBackground(Color.WHITE);
 		panel.setLayout(null);
 
-		// JBView is a Frame.
+		// JBView is a JFrame.
 		JBView view = new JBView(m, panel);
 		view.setSize(500, 400);
 		UtilGUI.centre(view);

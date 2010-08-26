@@ -20,7 +20,7 @@ public abstract class GObj extends JComponent
 	/** How many of same. May be <= ctlPoints.length. */
 	int nCtlPoints;
 
-	GObj() {
+	public GObj() {
 		ctlPoints = new Point2D[4];	// adequate for most.
 		nCtlPoints = 0;
 	}
@@ -46,9 +46,9 @@ public abstract class GObj extends JComponent
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 		if (selected)
-			g2.setColor(Color.blue);
+			g2.setColor(Color.BLUE);
 		else
-			g2.setColor(Color.black);
+			g2.setColor(Color.BLACK);
 		for (int i=0; i<nCtlPoints; i++)
 			g2.fill(getControlPoint(ctlPoints[i]));
 		draw(g);
@@ -56,7 +56,7 @@ public abstract class GObj extends JComponent
 
 	/** print -- just calls draw() directly. */
 	public void print(Graphics g) {
-		g.setColor(Color.black);	// interim
+		g.setColor(Color.BLACK);	// xxx interim
 		draw(g);
 	}
 
@@ -79,7 +79,7 @@ public abstract class GObj extends JComponent
 	/** Clone. Object.clone is protected, so you must write this
 	 * method even if it has nothing to do other than call super.clone().
 	 */
-	protected Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 
