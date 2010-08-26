@@ -1,4 +1,4 @@
-package jabagator;
+package jabagator.model;
 
 import java.awt.*;
 
