@@ -33,7 +33,7 @@
 		</copy>
 	</target>
 
-	<target name="try" depends="build">
+	<target name="run" depends="build">
 		<echo message="Doesn't work until you get the Apple GUI jar in"/>
 		<java classname="jabagator.JabaGator"
 			classpath="${build}:${build}/lib/jlfgr-1_0.jar:${darwinsys.jar}"/>
