@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.util.*;
 import java.io.*;
 
+import jabagator.model.*;
+
 /** This might someday be a draw program like Adobe Illustrator
  *
  * This part is the MODEL.

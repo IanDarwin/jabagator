@@ -4,7 +4,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-/** jbmcont - JabaGator Mouse Controller
+import jabagator.model.*;
+
+/** JabaGator Mouse Controller
  */
 public class JBCont extends Object 
 		implements MouseListener, MouseMotionListener {

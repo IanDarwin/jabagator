@@ -7,14 +7,10 @@ import java.util.*;
 import javax.swing.*;
 import java.net.URL;
 
+import jabagator.model.*;
+
 import com.darwinsys.swingui.I18N;
 import com.darwinsys.swingui.IntlAction;
-
-import com.darwinsys.macosui.AboutBoxHandler;
-import com.darwinsys.macosui.PrefsHandler;
-import com.darwinsys.macosui.PrintHandler;
-import com.darwinsys.macosui.ShutdownHandler;
-import com.darwinsys.macosui.MacOSUtil;
 
 /** This will become the View part of an MVC.
  * It will display a list of GObjs and paint them.
@@ -263,10 +259,6 @@ public class JBView extends JFrame implements AboutBoxHandler,
 				showAboutBox(JBView.this);
 			}
 		};
-		// On Mac OS X, only put the icon, not in Help->About.
-		if (!MacOSUtil.isMacOS()) {
-			hm.add(aboutAction);
-		}
 		toolBar.add(aboutAction);
 
 		// Set initial state of actions

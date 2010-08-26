@@ -8,9 +8,7 @@
 
 	<property name="deploy.dir" value="${basedir}/deploy"/>
 	<property name="deploy.jar" value="jabagator.jar"/>
-	<property name="darwinsys.jar"
-		value="/home/ian/classes/ext/com-darwinsys-all.jar"/>
-	
+	<property name="darwinsys.jar" value="lib/darwinsys.jar"/> 
 
 	<target name="init">
 		<tstamp/> <!-- Create the time stamp -->
