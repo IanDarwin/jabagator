@@ -8,8 +8,6 @@ public class GText extends GObj {
 	String text;
 	Font font;
 	int tWidth, tHeight;
-	/** 0, 1, 2, 3 */
-	int indent;
 
 	public String describe() { return "text"; }
 
@@ -22,23 +20,6 @@ public class GText extends GObj {
 		System.out.println("GText: size = " + d);
 		setSize(tWidth, tHeight);
 		ctlPoints[nCtlPoints++]=new Point(CP_SIZE/2, tHeight-CP_SIZE/2);
-	}
-
-	final int MAX_INDENT = 3;
-	public void setIndent(int indent) {
-		if (indent >= 0 && indent <= MAX_INDENT)
-			this.indent = indent;
-		else
-			throw new IllegalArgumentException("Indent must be in 0.." + MAX_INDENT);
-	}
-
-	public void indent() {
-		if (indent < MAX_INDENT)
-			indent++;
-	}
-	public void undent() {
-		if (indent > 0)
-			--indent;
 	}
 
 
