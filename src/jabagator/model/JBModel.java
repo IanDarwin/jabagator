@@ -3,7 +3,7 @@ package jabagator;
 import java.awt.*;
 import javax.swing.*;
 import java.util.*;
-import java.io.*;
+import java.util.List;
 
 import jabagator.model.*;
 
@@ -15,18 +15,14 @@ public class JBModel {
 	/** The View */
 	JBView view;
 	/** The list of GObjs to be displayed. Make Arraylist after add works. */
-	Vector v;
+	List<GObj> v;
 	/** The default filename. */
 	protected final static String DEFAULT_FILE =  "jabagator.save";
 	/** A mini-clipboard. */
 	GObj clipObject;
 
 	public JBModel() {
-		v = new Vector();
-	}
-
-	public Iterator iterator() {
-		return v.iterator();
+		v = new ArrayList<GObj>();
 	}
 
 	public void setView(JBView c) {
@@ -38,7 +34,7 @@ public class JBModel {
 	}
 
 	public void add(GObj o) {
-		v.addElement(o);
+		v.add(o);
 		view.addGObj(o);
 		//view.repaint();
 		o.repaint();
@@ -47,7 +43,7 @@ public class JBModel {
 	public void delete() {
 		GObj o;
 		if ((o = getSelected()) != null) {
-			v.removeElement(o);
+			v.remove(o);
 			view.removeGObj(o);
 			view.repaint();
 			showStatus("Deleted one object");
@@ -61,7 +57,7 @@ public class JBModel {
 		GObj o;
 		if ((o = getSelected()) != null) {
 			clipObject = o;
-			v.removeElement(o);
+			v.remove(o);
 			view.removeGObj(o);
 			view.repaint();
 			showStatus("Cut one " + o.describe());
@@ -137,44 +133,6 @@ public class JBModel {
 		ng.setSelected(true);
 	}
 
-	public void load() {
-		fakeObjs();
-		try {
-			ObjectInputStream is = new ObjectInputStream(
-				new FileInputStream(DEFAULT_FILE));
-			// Read the entire data structure.
-			v = (Vector)is.readObject();
-			// Now that the read succeeded, clear old from View, add new.
-			view.removeAllGObjs();
-			Iterator it = v.iterator();
-			while (it.hasNext()) {
-				GObj go = (GObj) it.next();
-				view.addGObj(go);
-			}
-			is.close();
-		} catch (ClassNotFoundException e) {
-			System.err.println("I O Error " + e);
-		} catch(IOException e) {
-			System.err.println("I O Error " + e);
-			return;
-		}
-		view.repaint();
-		showStatus("Loaded " + v.size() + " objects");
-	}
-
-	public void save() {
-		try {
-			ObjectOutputStream os = new ObjectOutputStream(
-				new FileOutputStream(DEFAULT_FILE));
-			os.writeObject(v);
-			os.flush();
-			os.close();
-		} catch(IOException e) {
-			showStatus("I O Error " + e);
-			return;
-		}
-		showStatus("Saved " + v.size() + " objects");
-	}
 
 	private void fakeObjs() {
 		GObj t;
@@ -183,23 +141,23 @@ public class JBModel {
 			view.addGObj(t);
 			((GText)t).setText("Hello");
 			t.setLocation(300, 200);
-			v.addElement(t);
+			v.add(t);
 		// highly fake:
 			t = new GLine(20, 20);
 			t.setLocation(150, 200);
-			v.addElement(t);
+			v.add(t);
 			view.addGObj(t);
 		// highly fake:
 			t = new GOval();
 			t.setLocation(50, 100);
 			t.setSize(60,20);
-			v.addElement(t);
+			v.add(t);
 			view.addGObj(t);
 		// highly fake:
 			t = new GRect(50, 50);
 			t.setLocation(200, 150);
 			t.setSize(50,50);
-			v.addElement(t);
+			v.add(t);
 			view.addGObj(t);
 		// "This feelin' of fakin' it, of not really makin' it,
 		// I still haven't shaken it..."  -- simon & garfunkel
@@ -207,7 +165,7 @@ public class JBModel {
 			p.addPoint(0,0);
 			p.addPoint(0, 50);
 			p.addPoint(50,0);
-			v.addElement(p);
+			v.add(p);
 			view.addGObj(p);
 			p.setLocation(300,70);
 		// highly fake:
@@ -216,5 +174,17 @@ public class JBModel {
 			// t.setSize(20,40);
 			// v.addElement(t);
 			// view.addGObj(t);
+	}
+
+	public void setContents(List<GObj> v) {
+		this.v = v;
+	}
+	public List<GObj> getContents() {
+		return v;
+	}
+
+	public void undo() {
+		Toolkit.getDefaultToolkit().beep();
+		System.out.println("Undo not implemented");
 	}
 }

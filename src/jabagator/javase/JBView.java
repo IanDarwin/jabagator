@@ -1,13 +1,37 @@
 package jabagator;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.print.*;
-import java.util.*;
-import javax.swing.*;
-import java.net.URL;
+import jabagator.io.LoadSave;
+import jabagator.io.LoadSaveSerial;
+import jabagator.model.GObj;
+import jabagator.model.GOval;
+import jabagator.model.GRect;
+import jabagator.model.GText;
 
-import jabagator.model.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JToolBar;
 
 import com.darwinsys.swingui.I18N;
 import com.darwinsys.swingui.IntlAction;
@@ -17,9 +41,12 @@ import com.darwinsys.swingui.IntlAction;
  */
 public class JBView extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	final int PAD = 10;
 	/** For showStatus() */
 	JLabel statusLabel;
+	/** The I/O module */
+	final LoadSave loadSaveInstance = LoadSaveSerial.getInstance();
 	/** The model that we are viewing */
 	JBModel model;
 	/** The JToolBar - part of JFC */
@@ -75,7 +102,7 @@ public class JBView extends JFrame {
 		Action openAction = new IntlAction(
 			b, "file.open", getJLFImageIcon("general/Open")) {
 			public void actionPerformed(ActionEvent e) {
-				model.load();
+				LoadSaveSerial.getInstance().load(model);
 			}
 		};
 		fm.add(openAction);
@@ -95,7 +122,7 @@ public class JBView extends JFrame {
 		Action saveAction = new IntlAction(
 			b, "file.save", getJLFImageIcon("general/Save")) {
 			public void actionPerformed(ActionEvent e) {
-				model.save();
+				LoadSaveSerial.getInstance().save(model);
 			}
 		};
 		fm.add(saveAction);
@@ -104,7 +131,7 @@ public class JBView extends JFrame {
 		Action saveAsAction = new IntlAction(
 			b, "file.saveas", getJLFImageIcon("general/SaveAs")) {
 			public void actionPerformed(ActionEvent e) {
-				model.save();
+				loadSaveInstance.save(model);
 			}
 		};
 		fm.add(saveAsAction);
@@ -217,7 +244,7 @@ public class JBView extends JFrame {
 		Action undoAction = 
 			new IntlAction(b, "edit.undo", getJLFImageIcon("general/Undo")) {
 			public void actionPerformed(ActionEvent e) {
-				// model.undo();
+				model.undo();
 			}
 		};
 		toolBar.add(undoAction);
