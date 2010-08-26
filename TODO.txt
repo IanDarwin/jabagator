@@ -11,9 +11,9 @@ Longer Term
 -----------
 Use Lists more: selection, for example.
 
-Split into model and view packages.
+Load and save in ODF.
 
-Load and save in SVG. Filename chooser.
+Filename chooser.
 
 Add "create()" method for interactive creation of objects.
 
