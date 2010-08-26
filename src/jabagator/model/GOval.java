@@ -2,7 +2,7 @@ package jabagator.model;
 
 import java.awt.*;
 
-class GOval extends GObj {
+public class GOval extends GObj {
 	public GOval() {
 		ctlPoints[nCtlPoints++] = new Point(0, 0);
 	}

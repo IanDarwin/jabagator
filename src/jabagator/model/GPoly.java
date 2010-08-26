@@ -2,7 +2,7 @@ package jabagator.model;
 
 import java.awt.*;
 
-class GPoly extends GObj {
+public class GPoly extends GObj {
 	Polygon points;
 
 	GPoly() {

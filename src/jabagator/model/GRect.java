@@ -2,8 +2,7 @@ package jabagator.model;
 
 import java.awt.*;
 
-
-class GRect extends GObj {
+public class GRect extends GObj {
 	boolean rounded = false;
 	int radius = 0;
 
