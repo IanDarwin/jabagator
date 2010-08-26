@@ -5,11 +5,11 @@ import java.awt.*;
 public class GPoly extends GObj {
 	Polygon points;
 
-	GPoly() {
+	public GPoly() {
 		this(null);
 	}
 
-	GPoly(Polygon p) {
+	public GPoly(Polygon p) {
 		if (p == null)
 			p = new Polygon();
 		setData(p);
