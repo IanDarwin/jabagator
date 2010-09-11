@@ -1,10 +1,14 @@
 package jabagator.model;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Point;
 
 /** Represents a text bullet */
 public class GText extends GObj {
+	private static final long serialVersionUID = -7470013014379005359L;
 	String text;
 	Font font;
 	int tWidth, tHeight;
@@ -21,7 +25,6 @@ public class GText extends GObj {
 		setSize(tWidth, tHeight);
 		ctlPoints[nCtlPoints++]=new Point(CP_SIZE/2, tHeight-CP_SIZE/2);
 	}
-
 
 	/** draw -- common code for paint & print -- draw the object. */
 	protected void draw(Graphics g) {
