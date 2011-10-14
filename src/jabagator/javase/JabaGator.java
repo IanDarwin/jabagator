@@ -1,7 +1,6 @@
-package javase;
+package jabagator.javase;
 
-import jabagator.JBCont;
-import jabagator.JBModel;
+import jabagator.model.JBModel;
 
 import java.awt.Color;
 

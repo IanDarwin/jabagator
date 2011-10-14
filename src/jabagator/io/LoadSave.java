@@ -1,6 +1,6 @@
 package jabagator.io;
 
-import jabagator.JBModel;
+import jabagator.model.JBModel;
 
 public interface LoadSave {
 

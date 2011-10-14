@@ -1,12 +1,12 @@
-package javase;
+package jabagator.javase;
 
-import jabagator.JBModel;
 import jabagator.io.LoadSave;
 import jabagator.io.LoadSaveSerial;
 import jabagator.model.GObj;
 import jabagator.model.GOval;
 import jabagator.model.GRect;
 import jabagator.model.GText;
+import jabagator.model.JBModel;
 
 import java.awt.BorderLayout;
 import java.awt.Container;

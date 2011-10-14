@@ -1,19 +1,12 @@
-package jabagator;
+package jabagator.model;
 
-import jabagator.model.GLine;
-import jabagator.model.GObj;
-import jabagator.model.GOval;
-import jabagator.model.GPoly;
-import jabagator.model.GRect;
-import jabagator.model.GText;
+import jabagator.javase.JBView;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javase.JBView;
 
 import javax.swing.JOptionPane;
 

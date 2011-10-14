@@ -1,4 +1,4 @@
-package jabagator;
+package jabagator.model;
 
 /** Class to do with Measurement */
 public class M extends Object {

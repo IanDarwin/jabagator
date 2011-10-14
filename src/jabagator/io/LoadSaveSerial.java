@@ -1,7 +1,7 @@
 package jabagator.io;
 
-import jabagator.JBModel;
 import jabagator.model.GObj;
+import jabagator.model.JBModel;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
