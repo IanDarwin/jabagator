@@ -7,6 +7,7 @@ import jabagator.model.GOval;
 import jabagator.model.GRect;
 import jabagator.model.GText;
 import jabagator.model.JBModel;
+import jabagator.view.MessageLevel;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -39,6 +40,7 @@ import com.darwinsys.swingui.IntlAction;
 
 /** This will become the View part of an MVC.
  * It will display a list of GObjs and paint them.
+ * XXX This should be an Interface with implementations.
  */
 public class JBView extends JFrame {
 
@@ -398,5 +400,19 @@ public class JBView extends JFrame {
 		toolBar.add(b);
 		b.setToolTipText(descr);
 		return b;
+	}
+
+	public void showMessageDialog(String message, String dialogTitle,
+			MessageLevel level) {
+		int intLevel = 0;
+		switch(level) {
+		case DEBUG:
+		case WARNING:
+			intLevel = JOptionPane.WARNING_MESSAGE; break;
+		case ERROR:
+			intLevel = JOptionPane.ERROR_MESSAGE; break;
+		}
+		
+		JOptionPane.showMessageDialog(this, message, dialogTitle, intLevel);
 	}
 }

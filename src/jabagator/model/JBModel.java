@@ -1,14 +1,11 @@
 package jabagator.model;
 
 import jabagator.javase.JBView;
+import jabagator.view.MessageLevel;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 
 /** This might someday be a draw program like Adobe Illustrator
  *
@@ -51,9 +48,9 @@ public class JBModel {
 			view.repaint();
 			showStatus("Deleted one object");
 		} else
-		JOptionPane.showMessageDialog(view,
+			view.showMessageDialog(
 			"Can only delete if you have something selected",
-			"Can't delete", JOptionPane.WARNING_MESSAGE);
+			"Can't delete", MessageLevel.WARNING);
 	}
 
 	public void cut() {
@@ -65,9 +62,9 @@ public class JBModel {
 			view.repaint();
 			showStatus("Cut one " + o.describe());
 		} else
-		JOptionPane.showMessageDialog(view,
+			view.showMessageDialog(
 			"Can only cut if you have something selected",
-			"Can't cut", JOptionPane.WARNING_MESSAGE);
+			"Can't cut", MessageLevel.WARNING);
 	}
 
 	public void copy() {
@@ -76,9 +73,9 @@ public class JBModel {
 			clipObject = o;
 			showStatus("Copied one " + o.describe());
 		} else
-		JOptionPane.showMessageDialog(view,
+		view.showMessageDialog(
 			"Can only copy if you have something selected",
-			"Can't copy", JOptionPane.WARNING_MESSAGE);
+			"Can't copy", MessageLevel.WARNING);
 	}
 
 	public void paste() {
@@ -90,23 +87,24 @@ public class JBModel {
 				System.err.println("CantHappen: " + e);
 				return;
 			}
-			Dimension d = view.getSize();
-			o.setLocation(d.width/2, d.height/2);
+			int width = view.getWidth();
+			int height = view.getHeight();
+			o.setLocation(width/2, height/2);
 			add(o);
 			setSelected(o);
 			showStatus("Pasted one " + o.describe());
 		} else
-			JOptionPane.showMessageDialog(view,
+			view.showMessageDialog(
 				"Nothing to paste",
-				"Paste", JOptionPane.WARNING_MESSAGE);
+				"Paste", MessageLevel.WARNING);
 	}
 
 	public void editSelected() {
 		GObj go;
 		if ((go = getSelected()) == null) {
-			JOptionPane.showMessageDialog(view,
+			view.showMessageDialog(
 				"Nothing selected to edit",
-				"Paste", JOptionPane.WARNING_MESSAGE);
+				"Paste", MessageLevel.WARNING);
 			return;
 		}
 		go.editAttributes();
@@ -187,7 +185,6 @@ public class JBModel {
 	}
 
 	public void undo() {
-		Toolkit.getDefaultToolkit().beep();
-		System.out.println("Undo not implemented");
+		view.showMessageDialog("Undo not implemented", "Error", MessageLevel.WARNING);
 	}
 }
