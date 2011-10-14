@@ -102,7 +102,7 @@ public class JBModel {
 		GObj go;
 		if ((go = getSelected()) == null) {
 			JOptionPane.showMessageDialog(view,
-				"Nothing to paste",
+				"Nothing selected to edit",
 				"Paste", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
@@ -114,7 +114,7 @@ public class JBModel {
 	 */
 	protected GObj getSelected() {
 		System.out.println("Finding Selected object...");
-		Iterator it = v.iterator();
+		Iterator<GObj> it = v.iterator();
 		while (it.hasNext()) {
 			GObj o = (GObj)it.next();
 			if (o.isSelected()) {
@@ -134,7 +134,7 @@ public class JBModel {
 	}
 
 
-	private void fakeObjs() {
+	void createFakeObjs() {
 		GObj t;
 		// highly fake:
 			t = new GText();
