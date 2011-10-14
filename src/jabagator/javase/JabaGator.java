@@ -32,7 +32,7 @@ public class JabaGator {
 		m.setView(view);			// interconnect
 
 		// connect the Controller
-		JBCont c = new JBCont(m, view);
+		JBController c = new JBController(m, view);
 		panel.addMouseListener(c);
 		panel.addMouseMotionListener(c);
 	}

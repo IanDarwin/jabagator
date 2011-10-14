@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 
 /** JabaGator Mouse Controller
  */
-public class JBCont extends Object 
+public class JBController extends Object 
 		implements MouseListener, MouseMotionListener {
 	/** The component we are controlling */
 	JBModel model;
@@ -25,7 +25,7 @@ public class JBCont extends Object
 	int curX, curY;
 
 	/** Construct an JBController object */
-	public JBCont(JBModel model, JBView view) {
+	public JBController(JBModel model, JBView view) {
 		super();
 		this.model = model;
 		this.view = view;
