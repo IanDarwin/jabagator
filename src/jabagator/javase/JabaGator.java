@@ -1,11 +1,11 @@
-package main;
+package javase;
+
+import jabagator.JBCont;
+import jabagator.JBModel;
 
 import java.awt.Color;
 
 import javax.swing.JPanel;
-
-import jabagator.*;
-import jabagator.model.*;
 
 import com.darwinsys.swingui.UtilGUI;
 

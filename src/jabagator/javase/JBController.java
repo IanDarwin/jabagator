@@ -1,10 +1,14 @@
 package jabagator;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import jabagator.model.GObj;
 
-import jabagator.model.*;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+import javase.JBView;
 
 /** JabaGator Mouse Controller
  */

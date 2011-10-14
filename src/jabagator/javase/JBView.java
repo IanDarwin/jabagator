@@ -1,5 +1,6 @@
-package jabagator;
+package javase;
 
+import jabagator.JBModel;
 import jabagator.io.LoadSave;
 import jabagator.io.LoadSaveSerial;
 import jabagator.model.GObj;

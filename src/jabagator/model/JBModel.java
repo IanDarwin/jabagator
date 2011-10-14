@@ -1,11 +1,21 @@
 package jabagator;
 
-import java.awt.*;
-import javax.swing.*;
-import java.util.*;
+import jabagator.model.GLine;
+import jabagator.model.GObj;
+import jabagator.model.GOval;
+import jabagator.model.GPoly;
+import jabagator.model.GRect;
+import jabagator.model.GText;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import jabagator.model.*;
+import javase.JBView;
+
+import javax.swing.JOptionPane;
 
 /** This might someday be a draw program like Adobe Illustrator
  *
