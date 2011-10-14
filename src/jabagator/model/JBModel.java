@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class JBModel {
 	/** The View */
 	JBView view;
-	/** The list of GObjs to be displayed. Make Arraylist after add works. */
+	/** The list of GObjs to be displayed. */
 	List<GObj> v;
 	/** The default filename. */
 	protected final static String DEFAULT_FILE =  "jabagator.save";
