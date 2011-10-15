@@ -18,6 +18,10 @@ public class LoadSaveSerial implements LoadSave {
 	protected final static String DEFAULT_FILE =  "jabagator.save";
 	private static final LoadSaveSerial INSTANCE;
 	
+	/** Since we can't inherit static methods from an Interface in Java,
+	 * make a Singleton and use its instance methods; this way we can
+	 * use and interface...
+	 */
 	static {
 		INSTANCE = new LoadSaveSerial();
 	}
