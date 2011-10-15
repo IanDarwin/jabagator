@@ -1,3 +1,10 @@
+The Android version optionally makes use of the HTC "Pen" API for better drawing
+ability on tablets that support it.
+
+Some of the code (may be) adapted from the HTC sample code.
+
+(Or it will when I get it working).
+
 Tried installing the tablet API from the file:///... using AVD Manager
 
 Downloading HTC SDK for Tablets by HTC, Android API 12, revision 1
@@ -23,3 +30,4 @@ ns"
 
 C:\Users\Ian\HTCOpenSense>
 
+And in fact I can create and remove directories in it, so it's not a "permission denied" type problem.
