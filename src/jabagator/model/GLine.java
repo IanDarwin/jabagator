@@ -1,7 +1,8 @@
 package jabagator.model;
 
-import java.awt.*;
-import java.awt.geom.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 
 public class GLine extends GObj {
 	protected int lWidth;

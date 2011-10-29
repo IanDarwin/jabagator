@@ -1,6 +1,8 @@
 package jabagator.model;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
 
 public class GOval extends GObj {
 	public GOval() {

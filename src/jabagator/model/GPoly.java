@@ -1,6 +1,9 @@
 package jabagator.model;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 
 public class GPoly extends GObj {
 	Polygon points;
