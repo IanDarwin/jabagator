@@ -3,6 +3,17 @@ package jabagator.model;
 public class GPoint {
 	private int x, y;
 
+	public GPoint(int x, int y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+	
+	public GPoint(GPoint original) {
+		this.x = original.x;
+		this.y = original.y;
+	}
+
 	public int getX() {
 		return x;
 	}
