@@ -58,12 +58,12 @@ public class JBController extends Object
 		showStatus("mousePressed at " + startX + "," + startY);
 		inDrag = true;
 		if (selObj != null)
-			((GObj)selObj).setSelected(false);
+			((AWTGObj)selObj).setSelected(false);
 		Component tmpObj = view.getPanel().getComponentAt(startX, startY);
 
 		// If not instanceof GObj, user clicked in panel but not on GObj
-		if (tmpObj != null && tmpObj instanceof GObj) {
-			((GObj)tmpObj).setSelected(true);
+		if (tmpObj != null && tmpObj instanceof AWTGObj) {
+			((AWTGObj)tmpObj).setSelected(true);
 			showStatus("findElement("+startX+","+startY+")="+selObj);
 			selObj = tmpObj;
 		} else {

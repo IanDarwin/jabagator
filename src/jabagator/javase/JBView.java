@@ -323,10 +323,10 @@ public class JBView extends JFrame {
 	}
 
 	public void addGObj(GObj g) {
-		panel.add(g);
+		// panel.add(g);
 	}
 	public void removeGObj(GObj g) {
-		panel.remove(g);
+		// panel.remove(g);
 	}
 	public void removeAllGObjs() {
 		panel.removeAll();

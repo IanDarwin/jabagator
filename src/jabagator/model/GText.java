@@ -1,10 +1,8 @@
 package jabagator.model;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Point;
 
 /** Represents a text bullet */
 public class GText extends GObj {
@@ -18,12 +16,22 @@ public class GText extends GObj {
 	public void setText(String s) {
 		font = getFont();
 		text = s;
-		FontMetrics fm = getFontMetrics(font);
-		Dimension d = new Dimension(fm.stringWidth(text), fm.getAscent());
+		//FontMetrics fm = getFontMetrics(font);
+		Dimension d;
+		//d = new Dimension(fm.stringWidth(text), fm.getAscent());
+		d = new Dimension(200, 22); // arghh
 		tWidth = d.width; tHeight = (d.height);
 		System.out.println("GText: size = " + d);
 		setSize(tWidth, tHeight);
 		ctlPoints[nCtlPoints++]=new Point(CP_SIZE/2, tHeight-CP_SIZE/2);
+	}
+
+	public Font getFont() {
+		return font;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
 	}
 
 	/** draw -- common code for paint & print -- draw the object. */
@@ -37,4 +45,5 @@ public class GText extends GObj {
 		Point d = getLocation();
 		return getClass()+"[" + text + "@"+d.x+","+d.y+"]";
 	}
+
 }

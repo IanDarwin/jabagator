@@ -1,11 +1,10 @@
 package jabagator.model;
 
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
 
 public class GPoly extends GObj {
+
+	private static final long serialVersionUID = 4374771334128119402L;
 	Polygon points;
 
 	public GPoly() {
@@ -33,6 +32,7 @@ public class GPoly extends GObj {
 			return;
 		computeSize();
 	}
+
 	protected void computeSize() {
 		Rectangle r = points.getBounds();
 		setSize(r.width, r.height);
@@ -41,6 +41,6 @@ public class GPoly extends GObj {
 	public void draw(Graphics g) {
 		if (points == null)
 			return;
-		g.drawPolygon(points);
+		// g.drawPolygon(points);
 	}
 }

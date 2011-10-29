@@ -1,7 +1,8 @@
 package jabagator.model;
 
 public class Point {
-	private int x, y;
+	public int x;
+	public int y;
 
 	public Point(int x, int y) {
 		super();

@@ -3,12 +3,10 @@ package jabagator.model;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,19 +14,20 @@ import javax.swing.JOptionPane;
  *
  * Vaguely analogous to Component in java.awt.
  */
-public abstract class GObj extends JComponent 
-	implements Cloneable, java.io.Serializable {
+public abstract class GObj implements Cloneable, java.io.Serializable {
 	/** The UIDL, for serialization. */
-	public static long serialVersionUID=-1842877245453958698L;
+	public final static long serialVersionUID=-1842877245453958698L;
 	/** The size of a control point. */
 	final static int CP_SIZE = 4;
 	/** The control points */
-	Point2D[] ctlPoints;
+	Point[] ctlPoints;
 	/** How many of same. May be <= ctlPoints.length. */
 	int nCtlPoints;
+	int x, y;		// location
+	int width, height;
 
 	public GObj() {
-		ctlPoints = new Point2D[4];	// adequate for most.
+		ctlPoints = new Point[4];	// adequate for most.
 		nCtlPoints = 0;
 	}
 
@@ -57,7 +56,7 @@ public abstract class GObj extends JComponent
 		else
 			g2.setColor(Color.BLACK);
 		for (int i=0; i<nCtlPoints; i++)
-			g2.fill(getControlPoint(ctlPoints[i]));
+			g2.fill(getControlPoint(new java.awt.Point(ctlPoints[i].getX(), ctlPoints[i].getY())));
 		draw(g);
 	}
 
@@ -79,8 +78,7 @@ public abstract class GObj extends JComponent
 
 	/** Get the Parameter String (name+main values) of this GObj */
 	public String toString() {
-		Rectangle b = getBounds();
-		return getClass()+"[@"+b.x+","+b.y+";w="+b.width+",h="+b.height+"]";
+		return String.format("%s[%d,%d]", getClass(), x, y);
 	}
 
 	/** Clone. Object.clone is protected, so you must write this
@@ -89,6 +87,23 @@ public abstract class GObj extends JComponent
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
+	
+	public void setSize(int w, int h) {
+		this.width = w;
+		this.height = h;
+	}
+	
+	public Dimension getSize() {
+		return new Dimension(width, height);
+	}
+	
+	public Point getLocation() {
+		return new Point(x, y);
+	}
+	
+	public void setLocation(int x, int y) {
+		this.x = x; this.y = y;
+	}
 
 	/** Return a small box around a control point.
 	 * @author Jonathan Knudsen, in O'Reilly's <I>Java 2D</I> book.
@@ -96,5 +111,9 @@ public abstract class GObj extends JComponent
 	protected Shape getControlPoint(Point2D p) {
 		return new Rectangle2D.Double(
 			p.getX() - CP_SIZE / 2, p.getY() - CP_SIZE / 2, CP_SIZE, CP_SIZE);
+	}
+	
+	protected void repaint() {
+		
 	}
 }

@@ -2,9 +2,10 @@ package jabagator.model;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 
 public class GLine extends GObj {
+
+	private static final long serialVersionUID = 1L;
 	protected int lWidth;
 	protected int lHeight;
 
@@ -20,6 +21,6 @@ public class GLine extends GObj {
 
 	public void draw(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g.drawLine(0, 0, 0+lWidth, 0+lHeight);
+		g2.drawLine(0, 0, 0+lWidth, 0+lHeight);
 	}
 }
