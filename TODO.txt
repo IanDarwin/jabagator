@@ -5,13 +5,13 @@ Use Component.findChildAt() to locate active.
 Keep offset from obj origin so can move at any point
 (avoid jerk when start move)
 
-Use Swing Actions throughout the View/Controller - mostly done.
+Use Swing Actions throughout the JavaSE View/Controller - mostly done.
 
 Longer Term
 -----------
 Use Lists more: selection, for example.
 
-Load and save in ODF.
+Load and save in ODF and/or SVG.
 
 Filename chooser.
 
