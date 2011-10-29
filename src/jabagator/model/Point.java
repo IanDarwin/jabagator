@@ -1,15 +1,15 @@
 package jabagator.model;
 
-public class GPoint {
+public class Point {
 	private int x, y;
 
-	public GPoint(int x, int y) {
+	public Point(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
 	
-	public GPoint(GPoint original) {
+	public Point(Point original) {
 		this.x = original.x;
 		this.y = original.y;
 	}
