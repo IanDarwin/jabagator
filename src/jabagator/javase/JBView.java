@@ -394,14 +394,6 @@ public class JBView extends JFrame {
 		return ii;
 	}
 
-	/** Convenience routine for building the JToolBar */
-	public JButton addToToolBar(JToolBar toolBar, String descr, ImageIcon ii) {
-		JButton b = new JButton(ii);
-		toolBar.add(b);
-		b.setToolTipText(descr);
-		return b;
-	}
-
 	public void showMessageDialog(String message, String dialogTitle,
 			MessageLevel level) {
 		int intLevel = 0;
