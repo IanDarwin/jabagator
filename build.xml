@@ -2,7 +2,7 @@
 
 	<!-- $Id$ -->
 
-	<property name="src" value="."/>
+	<property name="src" value="src/main/java"/>
 	<property name="build" value="build"/>
 	<property name="build.compiler" value="modern"/>
 

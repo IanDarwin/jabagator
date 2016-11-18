@@ -1,1 +1,0 @@
-The Android code is, of necessity, in its own project!
