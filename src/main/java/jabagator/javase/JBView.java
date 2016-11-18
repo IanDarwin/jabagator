@@ -1,14 +1,5 @@
 package jabagator.javase;
 
-import jabagator.io.LoadSave;
-import jabagator.io.LoadSaveSerial;
-import jabagator.model.GObj;
-import jabagator.model.GOval;
-import jabagator.model.GRect;
-import jabagator.model.GText;
-import jabagator.model.JBModel;
-import jabagator.view.MessageLevel;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -25,7 +16,6 @@ import java.util.ResourceBundle;
 
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,6 +27,15 @@ import javax.swing.JToolBar;
 
 import com.darwinsys.swingui.I18N;
 import com.darwinsys.swingui.IntlAction;
+
+import jabagator.io.LoadSave;
+import jabagator.io.LoadSaveSerial;
+import jabagator.model.GObj;
+import jabagator.model.GOval;
+import jabagator.model.GRect;
+import jabagator.model.GText;
+import jabagator.model.JBModel;
+import jabagator.view.MessageLevel;
 
 /** This will become the View part of an MVC.
  * It will display a list of GObjs and paint them.

@@ -1,11 +1,9 @@
 package jabagator.javase;
 
-import jabagator.model.Dimension;
-import jabagator.model.GObj;
-import jabagator.model.Point;
-
 import java.awt.Component;
 import java.awt.Graphics;
+
+import jabagator.model.GObj;
 
 /** An AWT delegate for a GObj 
  */
