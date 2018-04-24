@@ -1,0 +1,6 @@
+= jabagator
+
+JabaGator is a Java-based drawing program.
+Any resemblance between JabaGator and Illustrator is purely good luck.
+
+The current version is just a work in progress, and is probably not ready to face the competition.
