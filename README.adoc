@@ -4,3 +4,37 @@ JabaGator is a Java-based drawing program.
 Any resemblance between JabaGator and Illustrator is purely good luck.
 
 The current version is just a work in progress, and is probably not ready to face the competition.
+
+== TODO
+
+=== Immediate Need
+
+Refactor to proper MVC: JabaGator extend Observable, JBView implement Observer.
+
+Then find out why adding rectangles, circles doesn't work ATM.
+
+=== Short Term
+
+Use Component.findChildAt() to locate active.
+
+Keep offset from obj origin so can move at any point
+(avoid jerk when start move)
+
+Use Swing Actions throughout the JavaSE View/Controller - mostly done.
+
+=== Longer Term
+
+Use Lists more: selection, for example.
+
+Load and save in ODF and/or SVG.
+
+Filename chooser.
+
+Add "create()" method for interactive creation of objects.
+
+Add "resize()".
+
+Add Properties editor for GObjects.
+
+When you have all that done, it's no longer just a toy,
+but a real demo program.
