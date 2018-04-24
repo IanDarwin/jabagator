@@ -8,6 +8,8 @@ import jabagator.model.GObj;
 /** An AWT delegate for a GObj 
  */
 public class AWTGObj extends Component {
+	private static final long serialVersionUID = 1L;
+
 	GObj inner;
 	
 	public boolean equals(Object obj) {
