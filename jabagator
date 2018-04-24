@@ -1,5 +1,5 @@
 #!/bin/sh
 
-JDDIR=target/classes
+JDDIR=target
 
-java -classpath ${JDDIR}:${JDDIR}/images:${JDDIR}/lib/jlfgr-1_0.jar:${JDDIR}/lib/darwinsys.jar jabagator.javase.JabaGator $*
+java -jar ${JDDIR}/jabagator-1.0.0-SNAPSHOT-jar-with-dependencies.jar $*
