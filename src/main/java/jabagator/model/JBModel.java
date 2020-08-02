@@ -15,14 +15,14 @@ public class JBModel {
 	/** The View */
 	JBView view;
 	/** The list of GObjs to be displayed. */
-	List<GObj> v;
+	List<GObject> v;
 	/** The default filename. */
 	protected final static String DEFAULT_FILE =  "jabagator.save";
 	/** A mini-clipboard. */
-	GObj clipObject;
+	GObject clipObject;
 
 	public JBModel() {
-		v = new ArrayList<GObj>();
+		v = new ArrayList<GObject>();
 	}
 
 	public void setView(JBView c) {
@@ -33,7 +33,7 @@ public class JBModel {
 		view.showStatus(s);
 	}
 
-	public void add(GObj o) {
+	public void add(GObject o) {
 		v.add(o);
 		view.addGObj(o);
 		//view.repaint();
@@ -41,7 +41,7 @@ public class JBModel {
 	}
 
 	public void delete() {
-		GObj o;
+		GObject o;
 		if ((o = getSelected()) != null) {
 			v.remove(o);
 			view.removeGObj(o);
@@ -54,7 +54,7 @@ public class JBModel {
 	}
 
 	public void cut() {
-		GObj o;
+		GObject o;
 		if ((o = getSelected()) != null) {
 			clipObject = o;
 			v.remove(o);
@@ -68,7 +68,7 @@ public class JBModel {
 	}
 
 	public void copy() {
-		GObj o;
+		GObject o;
 		if ((o = getSelected()) != null) {
 			clipObject = o;
 			showStatus("Copied one " + o.describe());
@@ -80,9 +80,9 @@ public class JBModel {
 
 	public void paste() {
 		if (clipObject != null) {
-			GObj o;
+			GObject o;
 			try {
-				o = (GObj)clipObject.clone();
+				o = (GObject)clipObject.clone();
 			} catch (CloneNotSupportedException e) {
 				System.err.println("CantHappen: " + e);
 				return;
@@ -100,7 +100,7 @@ public class JBModel {
 	}
 
 	public void editSelected() {
-		GObj go;
+		GObject go;
 		if ((go = getSelected()) == null) {
 			view.showMessageDialog(
 				"Nothing selected to edit",
@@ -113,11 +113,11 @@ public class JBModel {
 	/** Find the currently selected object, if any.
 	 * Should return List, not GObj.
 	 */
-	protected GObj getSelected() {
+	protected GObject getSelected() {
 		System.out.println("Finding Selected object...");
-		Iterator<GObj> it = v.iterator();
+		Iterator<GObject> it = v.iterator();
 		while (it.hasNext()) {
-			GObj o = (GObj)it.next();
+			GObject o = (GObject)it.next();
 			if (o.isSelected()) {
 				System.out.println("It's a " + o.describe());
 				return o;
@@ -127,8 +127,8 @@ public class JBModel {
 	}
 
 	/** Enforce the requirement that there be only one selected object. */
-	protected void setSelected(GObj ng) {
-		GObj g = getSelected();
+	protected void setSelected(GObject ng) {
+		GObject g = getSelected();
 		if (g != null)
 			g.setSelected(false);
 		ng.setSelected(true);
@@ -136,7 +136,7 @@ public class JBModel {
 
 
 	void createFakeObjs() {
-		GObj t;
+		GObject t;
 		// highly fake:
 			t = new GText();
 			view.addGObj(t);
@@ -177,10 +177,10 @@ public class JBModel {
 			// view.addGObj(t);
 	}
 
-	public void setContents(List<GObj> v) {
+	public void setContents(List<GObject> v) {
 		this.v = v;
 	}
-	public List<GObj> getContents() {
+	public List<GObject> getContents() {
 		return v;
 	}
 

@@ -2,7 +2,7 @@ package jabagator.model;
 
 import java.awt.Graphics;
 
-public class GRect extends GObj {
+public class GRect extends GObject {
 	boolean rounded = false;
 	int radius = 0;
 

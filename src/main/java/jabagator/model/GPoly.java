@@ -2,7 +2,7 @@ package jabagator.model;
 
 import java.awt.Graphics;
 
-public class GPoly extends GObj {
+public class GPoly extends GObject {
 
 	private static final long serialVersionUID = 4374771334128119402L;
 	Polygon points;

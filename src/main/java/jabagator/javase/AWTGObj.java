@@ -3,14 +3,14 @@ package jabagator.javase;
 import java.awt.Component;
 import java.awt.Graphics;
 
-import jabagator.model.GObj;
+import jabagator.model.GObject;
 
 /** An AWT delegate for a GObj 
  */
 public class AWTGObj extends Component {
 	private static final long serialVersionUID = 1L;
 
-	GObj inner;
+	GObject inner;
 	
 	public boolean equals(Object obj) {
 		return inner.equals(obj);

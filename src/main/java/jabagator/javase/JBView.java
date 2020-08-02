@@ -32,7 +32,7 @@ import com.darwinsys.swingui.IntlAction;
 
 import jabagator.io.LoadSave;
 import jabagator.io.LoadSaveSerial;
-import jabagator.model.GObj;
+import jabagator.model.GObject;
 import jabagator.model.GOval;
 import jabagator.model.GRect;
 import jabagator.model.GText;
@@ -328,10 +328,10 @@ public class JBView extends JFrame {
 		System.exit(0);
 	}
 
-	public void addGObj(GObj g) {
+	public void addGObj(GObject g) {
 		// panel.add(g);
 	}
-	public void removeGObj(GObj g) {
+	public void removeGObj(GObject g) {
 		// panel.remove(g);
 	}
 	public void removeAllGObjs() {

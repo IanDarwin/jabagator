@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * Vaguely analogous to Component in java.awt.
  */
-public abstract class GObj implements Cloneable, Serializable {
+public abstract class GObject implements Cloneable, Serializable {
 	/** The UIDL, for serialization. */
 	public final static long serialVersionUID=-1842877245453958698L;
 	/** The size of a control point. */
@@ -27,7 +27,7 @@ public abstract class GObj implements Cloneable, Serializable {
 	int x, y;		// location
 	int width, height;
 
-	public GObj() {
+	public GObject() {
 		ctlPoints = new Point[4];	// adequate for most.
 		nCtlPoints = 0;
 	}

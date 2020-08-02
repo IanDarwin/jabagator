@@ -3,7 +3,7 @@ package jabagator.model;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class GLine extends GObj {
+public class GLine extends GObject {
 
 	private static final long serialVersionUID = 1L;
 	protected int lWidth;

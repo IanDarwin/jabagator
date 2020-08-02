@@ -1,6 +1,6 @@
 package jabagator.io;
 
-import jabagator.model.GObj;
+import jabagator.model.GObject;
 import jabagator.model.JBModel;
 
 import java.io.FileInputStream;
@@ -31,12 +31,12 @@ public class LoadSaveSerial implements LoadSave {
 	}
 
 	public void load(JBModel model) {
-		List<GObj> v = null;
+		List<GObject> v = null;
 		try (
 			ObjectInputStream is = new ObjectInputStream(
 				new FileInputStream(DEFAULT_FILE));) {
 			// Read the entire data structure.
-			v = (List<GObj>)is.readObject();
+			v = (List<GObject>)is.readObject();
 			model.setContents(v);
 		} catch (ClassNotFoundException e) {
 			System.err.println("I O Error " + e);
@@ -45,30 +45,21 @@ public class LoadSaveSerial implements LoadSave {
 			return;
 		}
 		System.out.println("Loaded " + v.size() + " objects");
-		for (GObj g : v) {
+		for (GObject g : v) {
 			System.out.println(g);
 		}
 	}
 
 	public void save(JBModel model) {
-		ObjectOutputStream os = null;
-		List<GObj> v = model.getContents();
-		try {
-			os = new ObjectOutputStream(
-				new FileOutputStream(DEFAULT_FILE));
+		List<GObject> v = model.getContents();
+		try (
+			ObjectOutputStream os = new ObjectOutputStream(
+				new FileOutputStream(DEFAULT_FILE));) {
 			os.writeObject(v);
 			os.flush();
 		} catch(IOException e) {
 			System.out.println("I O Error " + e);
 			return;
-		} finally {
-			if (os != null) {
-				try {
-					os.close();
-				} catch (IOException e) {
-					// CANTHAPPEN
-				}
-			}
 		}
 		System.out.println("Saved " + v.size() + " objects");
 	}

@@ -4,7 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 /** Represents a text bullet */
-public class GText extends GObj {
+public class GText extends GObject {
 	private static final long serialVersionUID = -7470013014379005359L;
 	String text;
 	Font font;

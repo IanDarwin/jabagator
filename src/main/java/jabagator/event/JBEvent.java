@@ -1,12 +1,12 @@
 package jabagator.event;
 
-import jabagator.model.GObj;
+import jabagator.model.GObject;
 
 public class JBEvent {
 	JBAction action;
-	GObj object;
+	GObject object;
 	
-	public JBEvent(JBAction action, GObj object) {
+	public JBEvent(JBAction action, GObject object) {
 		super();
 		this.action = action;
 		this.object = object;
