@@ -1,7 +1,11 @@
 package jabagator.model;
 
+import java.io.Serializable;
+
 /** Class to do with Measurement */
-public class M extends Object {
+public class M implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	/** The number of units in a millimetre */
 	public final static int SCALE=100;
 

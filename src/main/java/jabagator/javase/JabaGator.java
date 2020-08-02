@@ -12,6 +12,7 @@ import com.darwinsys.swingui.UtilGUI;
  * This part just creates the whole mess.
  */
 public class JabaGator {
+
 	/** "main program" method - construct and show */
 	public static void main(String av[]) {
 

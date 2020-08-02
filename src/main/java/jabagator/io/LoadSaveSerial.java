@@ -31,11 +31,10 @@ public class LoadSaveSerial implements LoadSave {
 	}
 
 	public void load(JBModel model) {
-		ObjectInputStream is = null;
 		List<GObj> v = null;
-		try {
-			is = new ObjectInputStream(
-				new FileInputStream(DEFAULT_FILE));
+		try (
+			ObjectInputStream is = new ObjectInputStream(
+				new FileInputStream(DEFAULT_FILE));) {
 			// Read the entire data structure.
 			v = (List<GObj>)is.readObject();
 			model.setContents(v);
@@ -44,16 +43,11 @@ public class LoadSaveSerial implements LoadSave {
 		} catch(IOException e) {
 			System.err.println("I O Error " + e);
 			return;
-		} finally {
-			if (is != null) {
-				try {
-					is.close();
-				} catch (IOException e) {
-					// CANTHAPPEN
-				}
-			}
 		}
 		System.out.println("Loaded " + v.size() + " objects");
+		for (GObj g : v) {
+			System.out.println(g);
+		}
 	}
 
 	public void save(JBModel model) {

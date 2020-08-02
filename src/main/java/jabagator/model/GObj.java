@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 
 import javax.swing.JOptionPane;
 
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * Vaguely analogous to Component in java.awt.
  */
-public abstract class GObj implements Cloneable, java.io.Serializable {
+public abstract class GObj implements Cloneable, Serializable {
 	/** The UIDL, for serialization. */
 	public final static long serialVersionUID=-1842877245453958698L;
 	/** The size of a control point. */

@@ -2,6 +2,7 @@ package jabagator.javase;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import com.darwinsys.swingui.I18N;
@@ -63,6 +65,7 @@ public class JBView extends JFrame {
 	}
 
 	/** Construct the main view object (GUI layer) */
+	@SuppressWarnings("serial")
 	public JBView(JBModel m, JComponent c) {
 		super("JabaGator");
 
@@ -81,6 +84,10 @@ public class JBView extends JFrame {
 		toolBar = new JToolBar();
 
 		cp.add(BorderLayout.NORTH, toolBar); 
+		
+		final JPanel mainPanel = new JPanel();
+		mainPanel.setPreferredSize(new Dimension(400, 300));
+		cp.add(BorderLayout.CENTER, mainPanel);
 		cp.add(BorderLayout.SOUTH,
 			statusLabel = new JLabel("Welcome to JabaGator"));
 
@@ -295,7 +302,7 @@ public class JBView extends JFrame {
 		// Add the JComponent into the main window.
 		cp.add(BorderLayout.CENTER, c);
 
-		pack();
+		// pack();
 	}
 
 	public void showAboutBox(JFrame jf) {
