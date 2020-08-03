@@ -34,7 +34,7 @@ public class GText extends GObject {
 	}
 
 	/** draw -- common code for paint & print -- draw the object. */
-	protected void draw(Graphics g) {
+	public void draw(Graphics g) {
 		//g.setFont(font);
 		g.drawString(text, 1, getSize().height-1);
 		g.drawLine(0, tHeight-CP_SIZE/2, tWidth, tHeight-CP_SIZE/2);

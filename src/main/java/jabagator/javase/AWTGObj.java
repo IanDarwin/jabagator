@@ -16,8 +16,8 @@ public class AWTGObj extends Component {
 		return inner.equals(obj);
 	}
 
-	public void paint(Graphics g) {
-		inner.paint(g);
+	public void paintComponent(Graphics g) {
+		inner.draw(g);
 	}
 
 	public void setSize(int w, int h) {

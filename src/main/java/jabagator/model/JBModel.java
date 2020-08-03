@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+// NO IMPORTS FROM AWT OR SWING
+
 /** This might someday be a draw program like Adobe Illustrator
  *
  * This part is the MODEL.
@@ -14,7 +16,7 @@ import java.util.List;
 public class JBModel {
 	/** The View */
 	JBView view;
-	/** The list of GObjs to be displayed. */
+	/** The list of GObjectss to be displayed. */
 	List<GObject> v;
 	/** The default filename. */
 	protected final static String DEFAULT_FILE =  "jabagator.save";
@@ -135,7 +137,7 @@ public class JBModel {
 	}
 
 
-	void createFakeObjs() {
+	private void createDemoObjects() {
 		GObject t;
 		// highly fake:
 			t = new GText();

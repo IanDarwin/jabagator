@@ -37,6 +37,9 @@ public abstract class GObject implements Cloneable, Serializable {
 
 	/** If this object is selected */
 	protected transient boolean selected;
+	
+	/** draw -- common code for paint & print -- draw the object. */
+	public abstract void draw(Graphics g);
 
 	public void setSelected(boolean b) {
 		if (selected == b)
@@ -50,7 +53,7 @@ public abstract class GObject implements Cloneable, Serializable {
 	}
 
 	/** paint -- do selection color and control points, then draw(). */
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 		if (selected)
 			g2.setColor(Color.BLUE);
@@ -66,9 +69,6 @@ public abstract class GObject implements Cloneable, Serializable {
 		g.setColor(Color.BLACK);	// xxx interim
 		draw(g);
 	}
-
-	/** draw -- common code for paint & print -- draw the object. */
-	protected abstract void draw(Graphics g);
 
 	/** Edit the Attributes. */
 	public void editAttributes() {
